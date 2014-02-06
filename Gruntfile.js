@@ -89,6 +89,24 @@ module.exports = function (grunt) {
       }
     },
 
+    // Replace masks with actual values
+    replace: {
+      dist: {
+        options: {
+          patterns: [
+            // {
+            //   match: 'port',
+            //   replacement: '3000',
+            //   expression: false
+            // },
+            {
+              json: grunt.file.readJSON('settings-dev.json')
+            }
+          ]
+        }
+      }
+    },
+
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
       options: {

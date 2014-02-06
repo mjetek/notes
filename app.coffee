@@ -15,8 +15,8 @@ app = express()
 
 app.use express.errorHandler() if app.get('env') is 'development'
 
-app.set 'port', process.env.PORT or 3000
-app.set 'host', process.env.HOST or 'http://localhost'
+app.set 'port', process.env.PORT or @@port
+app.set 'host', process.env.HOST or '@@host'
 
 app.set 'views', path.join(__dirname, 'views')
 
