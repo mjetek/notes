@@ -5,7 +5,15 @@ mongoose = require 'mongoose'
 passport = require 'passport'
 LocalStrategy = require('passport-local').Strategy
 GoogleStrategy = require('passport-google').Strategy
+
+# connect to mongodb database 
+#todo: move it to separate model 
+mongooseUrl = 'mongodb://localhost/notes'
+mongoose.connect mongooseUrl
+
 app = express()
+
+app.use express.errorHandler() if app.get('env') is 'development'
 
 app.set 'port', process.env.PORT or 3000
 app.set 'host', process.env.HOST or 'http://localhost'
@@ -21,6 +29,8 @@ app.use express.session()
 
 app.use app.router()
 app.use express.static, path.join(__dirname, 'app')
+
+
 
 
 http.createServer(app).listen app.get 'port', ->
