@@ -25,6 +25,28 @@ module.exports = function (grunt) {
       dist: 'dist'
     },
 
+    'node-inspector': {
+      dev: {
+        'web-host': 'localhost',
+        'web-port': '3000'
+      }
+    },
+
+    nodemon: {
+      dev: {
+        script: 'app.coffee',
+        options: {
+          args: ['dev'],
+          nodeArgs: ['--debug'],
+          env: {
+            PORT: '3000'
+          },
+          ext: 'js,coffee',
+          ignore: 'node_modules/**'
+        }
+      }
+    },
+
     // Watches files for changes and runs tasks based on the changed files
     watch: {
       coffee: {
@@ -41,71 +63,65 @@ module.exports = function (grunt) {
       },
       gruntfile: {
         files: ['Gruntfile.js']
-      },
-      livereload: {
-        options: {
-          livereload: '<%= connect.options.livereload %>'
-        },
-        files: [
-          '<%= yeoman.app %>/{,*/}*.html',
-          '.tmp/styles/{,*/}*.css',
-          '.tmp/scripts/{,*/}*.js',
-          '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
-        ]
       }
+      // livereload: {
+      //   options: {
+      //     livereload: '<%= connect.options.livereload %>'
+      //   },
+      //   files: [
+      //     '<%= yeoman.app %>/{,*/}*.html',
+      //     '.tmp/styles/{,*/}*.css',
+      //     '.tmp/scripts/{,*/}*.js',
+      //     '<%= yeoman.app %>/images/{,*/}*.{png,jpg,jpeg,gif,webp,svg}'
+      //   ]
+      // }
     },
 
-    // The actual grunt server settings
-    connect: {
-      options: {
-        port: 9000,
-        // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost',
-        livereload: 35729
-      },
-      livereload: {
-        options: {
-          open: true,
-          base: [
-            '.tmp',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
-      test: {
-        options: {
-          port: 9001,
-          base: [
-            '.tmp',
-            'test',
-            '<%= yeoman.app %>'
-          ]
-        }
-      },
-      dist: {
-        options: {
-          base: '<%= yeoman.dist %>'
-        }
-      }
-    },
+    // // The actual grunt server settings
+    // connect: {
+    //   options: {
+    //     port: 9000,
+    //     // Change this to '0.0.0.0' to access the server from outside.
+    //     hostname: 'localhost',
+    //     livereload: 35729
+    //   },
+    //   livereload: {
+    //     options: {
+    //       open: true,
+    //       base: [
+    //         '.tmp',
+    //         '<%= yeoman.app %>'
+    //       ]
+    //     }
+    //   },
+    //   test: {
+    //     options: {
+    //       port: 9001,
+    //       base: [
+    //         '.tmp',
+    //         'test',
+    //         '<%= yeoman.app %>'
+    //       ]
+    //     }
+    //   },
+    //   dist: {
+    //     options: {
+    //       base: '<%= yeoman.dist %>'
+    //     }
+    //   }
+    // },
 
     // Replace masks with actual values
     replace: {
       all: {
         options: {
           patterns: [
-            // {
-            //   match: 'port',
-            //   replacement: '3000',
-            //   expression: false
-            // },
             {
               json: grunt.file.readJSON('settings-dev.json')
             }
           ]
         },
         files: [
-          // {src: ['<%= basename %>.template'], dest: '<%= basename %>'}
           {src: ['app-settings.coffee.template'], dest: 'app-settings.coffee'}
         ]
       }
@@ -153,13 +169,11 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
-    'bower-install': {
-      app: {
-        html: '<%= yeoman.app %>/index.html',
-        ignorePath: '<%= yeoman.app %>/'
-      }
-    },
-
+    // 'bower-install': {
+    //   app: {
+    //     html: 'views/layout.jade',
+    //   }
+    // },
 
     // Compiles CoffeeScript to JavaScript
     coffee: {
@@ -250,43 +264,44 @@ module.exports = function (grunt) {
       }
     },
 
-    // The following *-min tasks produce minified files in the dist folder
-    imagemin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.{png,jpg,jpeg,gif}',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    svgmin: {
-      dist: {
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.app %>/images',
-          src: '{,*/}*.svg',
-          dest: '<%= yeoman.dist %>/images'
-        }]
-      }
-    },
-    htmlmin: {
-      dist: {
-        options: {
-          collapseWhitespace: true,
-          collapseBooleanAttributes: true,
-          removeCommentsFromCDATA: true,
-          removeOptionalTags: true
-        },
-        files: [{
-          expand: true,
-          cwd: '<%= yeoman.dist %>',
-          src: ['*.html', 'views/{,*/}*.html'],
-          dest: '<%= yeoman.dist %>'
-        }]
-      }
-    },
+    // // The following *-min tasks produce minified files in the dist folder
+    // imagemin: {
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.app %>/images',
+    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
+    //       dest: '<%= yeoman.dist %>/images'
+    //     }]
+    //   }
+    // },
+    // svgmin: {
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.app %>/images',
+    //       src: '{,*/}*.svg',
+    //       dest: '<%= yeoman.dist %>/images'
+    //     }]
+    //   }
+    // },
+    // Not necessary since compiled jade files are already minimized
+    // htmlmin: {
+    //   dist: {
+    //     options: {
+    //       collapseWhitespace: true,
+    //       collapseBooleanAttributes: true,
+    //       removeCommentsFromCDATA: true,
+    //       removeOptionalTags: true
+    //     },
+    //     files: [{
+    //       expand: true,
+    //       cwd: '<%= yeoman.dist %>',
+    //       src: ['*.html', 'views/{,*/}*.html'],
+    //       dest: '<%= yeoman.dist %>'
+    //     }]
+    //   }
+    // },
 
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
@@ -401,17 +416,15 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'bower-install',
+      'replace',
+      // 'bower-install',
       'concurrent:server',
       'autoprefixer',
-      'connect:livereload',
+      //'connect:livereload',
+      'node-inspector',
+      'nodemon',
       'watch'
     ]);
-  });
-
-  grunt.registerTask('server', function () {
-    grunt.log.warn('The `server` task has been deprecated. Use `grunt serve` to start a server.');
-    grunt.task.run(['serve']);
   });
 
   grunt.registerTask('test', [
@@ -426,7 +439,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    'bower-install',
+    // 'bower-install',
     'replace',
     'useminPrepare',
     'concurrent:dist',

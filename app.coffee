@@ -28,11 +28,10 @@ app.use express.urlencoded()
 app.use express.bodyParser()
 app.use express.session()
 
-app.use app.router()
+app.use app.router
 app.use express.static, path.join(__dirname, 'app')
 
-
-
+routes.routes.applyRoutes app
 
 http.createServer(app).listen app.get 'port', ->
     console.log "Express server listening on port #{app.get 'port'}"

@@ -34,7 +34,8 @@
     "load-grunt-tasks": "~0.2.0",
     "time-grunt": "~0.2.1",
     "grunt-replace": "~0.6.1",
-    "grunt-nodemon": "~0.2.0"
+    "grunt-nodemon": "~0.2.0",
+    "grunt-node-inspector": "~0.1.2"
   },
   "engines": {
     "node": ">=0.8.0"
