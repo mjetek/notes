@@ -357,6 +357,9 @@ module.exports = function (grunt) {
 
     // Run some tasks in parallel to speed up the build process
     concurrent: {
+      options: {
+        limit: 6,
+      },
       server: [
         'coffee:dist',
         'compass:server'
@@ -420,8 +423,8 @@ module.exports = function (grunt) {
       // 'bower-install',
       'concurrent:server',
       'autoprefixer',
-      //'connect:livereload',
-      'node-inspector',
+      //'connect:livereload'
+      //'node-inspector',
       'nodemon',
       'watch'
     ]);
