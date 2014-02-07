@@ -91,7 +91,7 @@ module.exports = function (grunt) {
 
     // Replace masks with actual values
     replace: {
-      dist: {
+      all: {
         options: {
           patterns: [
             // {
@@ -103,7 +103,11 @@ module.exports = function (grunt) {
               json: grunt.file.readJSON('settings-dev.json')
             }
           ]
-        }
+        },
+        files: [
+          // {src: ['<%= basename %>.template'], dest: '<%= basename %>'}
+          {src: ['app-settings.coffee.template'], dest: 'app-settings.coffee'}
+        ]
       }
     },
 
@@ -418,9 +422,12 @@ module.exports = function (grunt) {
     'karma'
   ]);
 
+  grunt.registerTask('testreplace', ['replace']);
+
   grunt.registerTask('build', [
     'clean:dist',
     'bower-install',
+    'replace',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

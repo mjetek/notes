@@ -5,6 +5,7 @@ mongoose = require 'mongoose'
 passport = require 'passport'
 LocalStrategy = require('passport-local').Strategy
 GoogleStrategy = require('passport-google').Strategy
+appSettings require './app-settings'
 
 # connect to mongodb database 
 #todo: move it to separate model 
@@ -15,12 +16,12 @@ app = express()
 
 app.use express.errorHandler() if app.get('env') is 'development'
 
-app.set 'port', process.env.PORT or @@port
-app.set 'host', process.env.HOST or '@@host'
 
 app.set 'views', path.join(__dirname, 'views')
-
 app.set 'view engine', 'jade'
+
+appSettings.applySettings app
+
 app.use express.favicon()
 app.use express.json()
 app.use express.urlencoded()
