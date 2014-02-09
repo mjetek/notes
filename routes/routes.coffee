@@ -1,4 +1,4 @@
-routes = require '.'
+index = require './index'
 
-exports.applyRoutes (app) ->
-  app.get '/' routes.index
+exports.applyRoutes = (app) ->
+  app.get '/', index.index
