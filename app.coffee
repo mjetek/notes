@@ -1,18 +1,11 @@
 express = require 'express'
 routes = require './routes/routes'
-# routes = require './routes'
+db = require './db/db'
 http = require 'http'
 path = require 'path'
 mongoose = require 'mongoose'
 passport = require 'passport'
-LocalStrategy = require('passport-local').Strategy
-GoogleStrategy = require('passport-google').Strategy
 appSettings = require './app-settings'
-
-# connect to mongodb database 
-#todo: move it to separate model 
-mongooseUrl = 'mongodb://localhost/notes'
-mongoose.connect mongooseUrl
 
 app = express()
 
