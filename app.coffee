@@ -1,5 +1,6 @@
 express = require 'express'
 routes = require './routes/routes'
+# routes = require './routes'
 http = require 'http'
 path = require 'path'
 mongoose = require 'mongoose'
@@ -27,12 +28,13 @@ app.use express.json()
 app.use express.urlencoded()
 app.use express.bodyParser()
 app.use express.methodOverride()
-app.use express.session()
+app.use express.cookieParser()
+app.use express.session({secret: app.get('session secretKey')})
 
 app.use app.router
 app.use express.static(path.join(__dirname, 'app'))
 
 routes.applyRoutes app
 
-http.createServer(app).listen app.get 'port', ->
+http.createServer(app).listen app.get('port'), ->
   console.log "Express server listening on port #{app.get 'port'}"
