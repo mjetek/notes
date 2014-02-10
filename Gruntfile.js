@@ -36,11 +36,11 @@ module.exports = function (grunt) {
       dev: {
         script: 'app.coffee',
         options: {
-          // args: ['dev'],
-          // nodeArgs: ['--debug'],
-          // env: {
-          //   PORT: '3000'
-          // },
+          args: ['dev'],
+          nodeArgs: ['--nodejs', '--debug'],
+          env: {
+            PORT: '3000'
+          },
           ext: 'js,coffee',
           ignore: 'node_modules/**'
         }
@@ -373,7 +373,17 @@ module.exports = function (grunt) {
         'compass:dist',
         'imagemin',
         'svgmin'
-      ]
+      ],
+      debug: {
+        tasks: [
+          'node-inspector',
+          'nodemon',
+          'watch'
+        ],
+        options: {
+          logConcurrentOutput: true
+        }
+      }
     },
 
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
@@ -424,9 +434,10 @@ module.exports = function (grunt) {
       'concurrent:server',
       'autoprefixer',
       //'connect:livereload'
-      //'node-inspector',
-      'nodemon',
-      'watch'
+      // 'node-inspector',
+      // 'nodemon',
+      // 'watch'
+      'concurrent:debug'
     ]);
   });
 
