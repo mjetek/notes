@@ -14,7 +14,7 @@ app.use express.errorHandler() if app.get('env') is 'development'
 app.set 'views', path.join(__dirname, 'views')
 app.set 'view engine', 'jade'
 
-appSettings.applySettings app
+appSettings.applySettings(app)
 
 app.use express.favicon()
 app.use express.json()
