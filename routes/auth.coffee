@@ -14,7 +14,7 @@ exports.facebook = passport.authenticate 'facebook'
 exports.facebookCb = passport.authenticate 'facebook', callbackConfig
 
 exports.google = passport.authenticate 'google'
-exports.googleCb = passport.authenticate 'google' callbackConfig
+exports.googleCb = passport.authenticate 'google', callbackConfig
 
 exports.logout = (req, res) ->
   req.logout()

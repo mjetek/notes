@@ -185,8 +185,8 @@ module.exports = function (grunt) {
         files: [
         {
           expand: true,
-          src: '**/*.coffee'
-          dest: 'dist'
+          src: ['**/*.coffee', '!bower_components'],
+          dest: 'dist',
           ext: '.js'
         },
         {
