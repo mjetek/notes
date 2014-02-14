@@ -1,20 +1,6 @@
 mongoose = require 'mongoose'
 passwordHash = require 'password-hash'
 
-facebookOAuth2Schema = mongoose.Schema
-  id:
-    type: String
-    required: yes
-    index:
-      unique: yes
-
-googleOpenIdSchema = mongoose.Schema
-  id:
-    type: String
-    required: yes
-    index:
-      unique: yes
-
 userSchema = mongoose.Schema
   username:
     type: String
@@ -23,12 +9,18 @@ userSchema = mongoose.Schema
       unique: yes
   password:
     type: String
+    validate: [(val) -> val?.length or provider?, "{PATH} cannot be empty."]
+
   email:
     type: String
   active: Boolean
   registrationTime:
     type: Date
     default: Date.now
+  provider: String
+  facebook: {}
+  twitter: {}
+  google: {}
 
 userSchema.pre 'save', (next) ->
   user = this
