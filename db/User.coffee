@@ -9,7 +9,10 @@ userSchema = mongoose.Schema
       unique: yes
   password:
     type: String
-    validate: [(val) -> val?.length or provider?, "{PATH} cannot be empty."]
+    validate: [
+      (val) -> val?.length or provider?,
+      "{PATH} cannot be empty."
+    ]
 
   email:
     type: String
