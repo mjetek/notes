@@ -112,20 +112,20 @@ module.exports = function (grunt) {
     // },
 
     // Replace masks with actual values
-    replace: {
-      all: {
-        options: {
-          patterns: [
-            {
-              json: grunt.file.readJSON('settings-dev.json')
-            }
-          ]
-        },
-        files: [
-          {src: ['app-settings.coffee.template'], dest: 'app-settings.coffee'}
-        ]
-      }
-    },
+    // replace: {
+    //   all: {
+    //     options: {
+    //       patterns: [
+    //         {
+    //           json: grunt.file.readJSON('settings-dev.json')
+    //         }
+    //       ]
+    //     },
+    //     files: [
+    //       {src: ['app-settings.coffee.template'], dest: 'app-settings.coffee'}
+    //     ]
+    //   }
+    // },
 
     // Make sure code styles are up to par and there are no obvious mistakes
     jshint: {
@@ -436,7 +436,7 @@ module.exports = function (grunt) {
 
     grunt.task.run([
       'clean:server',
-      'replace',
+      // 'replace',
       // 'bower-install',
       'concurrent:server',
       'autoprefixer',

@@ -1,10 +1,12 @@
 express = require 'express'
 routes = require './routes/routes'
+
 db = require './db/db'
 http = require 'http'
 path = require 'path'
 mongoose = require 'mongoose'
 passport = require 'passport'
+passportConfig = require './passport'
 appSettings = require './app-settings'
 
 app = express()
@@ -14,7 +16,7 @@ app.use express.errorHandler() if app.get('env') is 'development'
 app.set 'views', path.join(__dirname, 'views')
 app.set 'view engine', 'jade'
 
-appSettings.applySettings(app)
+passportConfig.setAuthentication(app);
 
 app.use express.favicon()
 app.use express.json()

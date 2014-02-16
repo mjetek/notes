@@ -1,7 +1,0 @@
-exports.applySettings = (app) ->
-  app.set 'port', process.env.PORT or @@port
-  app.set 'host', process.env.HOST or '@@host'
-  app.set 'facebook appId', '@@facebook.appId'
-  app.set 'facebook appSecret', '@@facebook.appSecret'
-  app.set 'session secretKey', '@@session.secretKey'
-
