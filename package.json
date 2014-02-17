@@ -40,7 +40,8 @@
     "time-grunt": "~0.2.1",
     "grunt-replace": "~0.6.1",
     "grunt-nodemon": "~0.2.0",
-    "grunt-node-inspector": "~0.1.2"
+    "grunt-node-inspector": "~0.1.2",
+    "underscore": "~1.6.0"
   },
   "engines": {
     "node": ">=0.8.0"

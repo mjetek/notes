@@ -1,8 +1,8 @@
-index = require './index'
-auth = require './auth'
+auth = require '../routes/auth'
+index = require '../routes'
 
-exports.applyRoutes = (app) ->
-  # Index
+module.exports = (app) ->
+    # Index
   app.get '/', index.index
   # Authentication
   app.get '/login', auth.login

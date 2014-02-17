@@ -39,6 +39,7 @@ module.exports = function (grunt) {
           args: ['dev'],
           nodeArgs: ['--nodejs', '--debug'],
           env: {
+            NODE_ENV: 'development',
             PORT: '3000'
           },
           ext: 'js,coffee',
