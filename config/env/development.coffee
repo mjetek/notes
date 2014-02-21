@@ -1,6 +1,6 @@
 module.exports =
   port: 3000
-  host: 'http://localhost'
+  host: 'www.localhost'
   facebook:
     appId: '395890997221796'
     appSecret: '369387dff5eb55fff0edfdb162a7b870'

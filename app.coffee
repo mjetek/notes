@@ -7,6 +7,7 @@ path = require 'path'
 app = express()
 
 require('./config/express') app
+require('./config/passport') app
 require('./config/routes') app
 
 http.createServer(app).listen app.get('port'), ->
