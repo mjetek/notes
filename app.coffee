@@ -1,13 +1,12 @@
 express = require 'express'
-
 db = require './db/db'
-passport = require 'passport'
 http = require 'http'
-path = require 'path'
+passport = require 'passport'
+
 app = express()
 
-require('./config/express') app
-require('./config/passport') app
+require('./config/passport') passport
+require('./config/express') app, passport
 require('./config/routes') app
 
 http.createServer(app).listen app.get('port'), ->

@@ -13,7 +13,9 @@ userSchema = mongoose.Schema
       (val) -> val?.length or provider?,
       "{PATH} cannot be empty."
     ]
-
+  displayName:
+    type: String
+    required: yes
   email:
     type: String
   active: Boolean

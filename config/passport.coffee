@@ -1,11 +1,10 @@
-passport = require 'passport'
 LocalStrategy = require('passport-local').Strategy
 FacebookStrategy = require('passport-facebook').Strategy
 config = require './index'
 url = require 'url'
 User = require '../db/User'
 
-module.exports = (app) ->
+module.exports = (passport) ->
   baseUrl = url.format
     protocol: 'http'
     hostname: config.host
@@ -26,16 +25,23 @@ module.exports = (app) ->
       clientID: config.facebook.appId
       clientSecret: config.facebook.appSecret
       callbackURL: url.resolve baseUrl, 'auth/facebook/callback'
+      scope: ['basic_info', 'email']
+      profileFields: ['id', 'displayName', 'username', 'name', 'emails']
     }, (accessToken, refreshToken, profile, done) ->
-      return done err if err
-      if not user then return User.create
-        name: profile.displayName
-        email: profile.emails[0].value
-        username: profile.username
-        provider: 'facebook'
-        facebook: profile._json, (err, user) ->
-          done err, user
-      return done null, user
-  
+      User.findOne {'facebook.id': profile.id}, (err, user) ->
+        if not user then return User.create
+          displayName: profile.displayName
+          email: profile.emails?[0]?.value
+          username: profile.username
+          provider: 'facebook'
+          facebook: profile._json, (err, user) ->
+            done err, user
+        return done err, user
+
+  passport.serializeUser (user, done) -> done null, user._id
+  passport.deserializeUser (id, done) -> User.findOne({_id: id}, 'displayName').lean().exec (err, user) ->
+    done err, user
+
   passport.use localStrategy
   passport.use facebookStrategy
+

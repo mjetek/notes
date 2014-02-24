@@ -14,6 +14,13 @@ module.exports = (app, passport) ->
   app.use express.methodOverride()
   app.use express.cookieParser()
   app.use express.session({secret: config.session.secretKey})
+  app.use passport.initialize()
+  app.use passport.session()
+
+  app.use (req, res, next) ->
+    res.locals.currentUser = req.user
+    next()
+
   app.use app.router
 
   app.set 'port', config.port
