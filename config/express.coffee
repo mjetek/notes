@@ -21,10 +21,10 @@ module.exports = (app, passport) ->
     res.locals.currentUser = req.user
     next()
 
+  app.use express.static(path.join(__dirname, 'app'))
   app.use app.router
 
   app.set 'port', config.port
   app.set 'views', path.join(__dirname, '../views')
   app.set 'view engine', 'jade'
 
-  app.use express.static(path.join(__dirname, 'app'))

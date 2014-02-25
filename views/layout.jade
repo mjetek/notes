@@ -8,11 +8,13 @@ html
     link(rel='stylesheet', href='app/bower_components/foundation/css/foundation.css')
     // endbower
   body
-    if currentUser
-      p #{currentUser.displayName}
-      a(href='/logout') logout
-    else
-      a(href='/login') login
+    .row
+      .large-9.columns
+        if currentUser
+          p #{currentUser.displayName}
+          a(href='/logout') logout
+        else
+          a(href='/login') login
     block content
 
     // bower:js
