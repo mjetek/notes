@@ -4,14 +4,18 @@ passwordHash = require 'password-hash'
 userSchema = mongoose.Schema
   username:
     type: String
-    required: yes
+    required: no
     index:
       unique: yes
+    validate: [
+      (val) -> val?.length or provider?,
+      '{PATH} cannot be empty'
+    ]
   password:
     type: String
     validate: [
       (val) -> val?.length or provider?,
-      "{PATH} cannot be empty."
+      '{PATH} cannot be empty.'
     ]
   displayName:
     type: String
