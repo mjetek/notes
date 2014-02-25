@@ -171,11 +171,11 @@ module.exports = function (grunt) {
     },
 
     // Automatically inject Bower components into the app
-    // 'bower-install': {
-    //   app: {
-    //     html: 'views/layout.jade',
-    //   }
-    // },
+    bowerInstall: {
+      dist: {
+        src: ['views/**/*.jade']
+      }
+    },
 
     // Compiles CoffeeScript to JavaScript
     coffee: {
@@ -439,7 +439,7 @@ module.exports = function (grunt) {
     grunt.task.run([
       'clean:server',
       // 'replace',
-      // 'bower-install',
+      'bowerInstall',
       'concurrent:server',
       'autoprefixer',
       //'connect:livereload'
@@ -462,7 +462,7 @@ module.exports = function (grunt) {
 
   grunt.registerTask('build', [
     'clean:dist',
-    // 'bower-install',
+    'bowerInstall',
     'replace',
     'useminPrepare',
     'concurrent:dist',
