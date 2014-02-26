@@ -9,7 +9,7 @@ block content
       label(for='password') Password
       input(type='password', id='password', name='password', placeholder='Password')
     .row
-      input(type='submit', value='Log in')
-      | or login with: &nbsp;
+      input(type='submit', value='Log in').button
+      |&nbsp; or login with: &nbsp;
       a(href='/auth/google').button.google Google
       a(href='/auth/facebook').button.facebook Facebook
