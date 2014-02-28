@@ -3,5 +3,7 @@ dist
 .tmp
 .sass-cache
 app/bower_components
+npm-debug.log
 # keep only app.coffee in repository
 app.js
+
