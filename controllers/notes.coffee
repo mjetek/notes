@@ -1,6 +1,7 @@
+Note = require '../db/Note'
+
 exports.create = (note, next) ->
-  next null, note
+  Note.create note, next
 
 exports.getByPermalink = (permalink, next) ->
-  next null
-
+  Note.findOne {permalink: permalink}, next
