@@ -1,7 +1,7 @@
-Note = require '../db/Note'
+module.exports = (Note) ->
 
-exports.create = (note, next) ->
-  Note.create note, next
+  create: (note, next) ->
+    Note.create note, next
 
-exports.getByPermalink = (permalink, next) ->
-  Note.findOne {permalink: permalink}, next
+  getByPermalink: (permalink, next) ->
+    Note.findOne {permalink: permalink}, next

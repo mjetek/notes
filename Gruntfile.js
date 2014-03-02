@@ -185,12 +185,12 @@ module.exports = function (grunt) {
       },
       dist: {
         files: [
-        {
-          expand: true,
-          src: ['**/*.coffee', '!bower_components'],
-          dest: 'dist',
-          ext: '.js'
-        },
+        // {
+        //   expand: true,
+        //   src: ['**/*.coffee', '!app/bower_components/**'],
+        //   dest: 'dist',
+        //   ext: '.js'
+        // },
         {
           expand: true,
           cwd: '<%= yeoman.app %>/scripts',
@@ -422,10 +422,28 @@ module.exports = function (grunt) {
     // },
 
     // Test settings
+    // Server side code
+    mochaTest: {
+      unit: {
+        src: ['test/server/**/*.coffee']
+      },
+      options: {
+        require: [
+          'coffee-script/register'
+        ]
+      }
+    },
+
+    // Client side code
     karma: {
       unit: {
-        configFile: 'karma.conf.js',
-        singleRun: true
+        frameworks: ['mocha'],
+        //configFile: 'karma.conf.js',
+        singleRun: true,
+        browsers: ['PhantomJS'],
+        options: {
+          files: ['test/client/**/*.coffee']
+        }
       }
     }
   });
@@ -442,10 +460,6 @@ module.exports = function (grunt) {
       'bowerInstall',
       'concurrent:server',
       'autoprefixer',
-      //'connect:livereload'
-      // 'node-inspector',
-      // 'nodemon',
-      // 'watch'
       'concurrent:debug'
     ]);
   });
@@ -454,8 +468,8 @@ module.exports = function (grunt) {
     'clean:server',
     'concurrent:test',
     'autoprefixer',
-    'connect:test',
-    'karma'
+    'mochaTest:unit'
+    //'karma:unit'
   ]);
 
   grunt.registerTask('testreplace', ['replace']);
