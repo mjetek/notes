@@ -428,6 +428,7 @@ module.exports = function (grunt) {
         src: ['test/server/**/*.coffee']
       },
       options: {
+        reporter: 'spec',
         require: [
           'coffee-script/register'
         ]
