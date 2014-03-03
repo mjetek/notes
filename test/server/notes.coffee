@@ -6,7 +6,7 @@ describe 'Note', ->
   describe '#create()', ->
     # before ->
 
-    it 'should invoke create method on Note model', (done) ->
+    it 'should create new note', (done) ->
       testNote =
         title: 'test note'
         content: 'some content'
@@ -18,7 +18,9 @@ describe 'Note', ->
       notesCreateMock = sinon
         .stub(notes, 'create')
         .callsArg 1
-
+        
       notesCtrl = require('../../controllers/notes') notes
 
-      notesCtrl.create testNote, done
+      notesCtrl.create testNote, (err, note) ->
+        expect(notesCreateMock.calledOnce).to.be.true
+        done err
