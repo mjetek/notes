@@ -1,10 +1,10 @@
 expect = require('chai').expect
-# mongoose = require 'mongoose'
 sinon = require 'sinon'
+sandbox
 
 describe 'Note', ->
   describe '.create()', ->
-    it 'should create new note', (done) ->
+    it 'should create new note', sinon.test (done) ->
       testNote =
         title: 'test note'
         # content: 'some content'
@@ -13,13 +13,12 @@ describe 'Note', ->
         permalink: 'test-note'
       notes = require '../../db/Note'
 
-      createStub = sinon.stub(notes, 'create').callsArg 1
+      createStub = this.stub(notes, 'create').callsArg 1
 
       notesCtrl = require('../../controllers/notes') notes
 
       notesCtrl.create testNote, (err, note) ->
         expect(createStub.withArgs(testNote).calledOnce).to.be.true
-        createStub.restore()
         done err
 
   describe '.getByPermalink()', ->
