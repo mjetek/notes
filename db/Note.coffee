@@ -20,4 +20,7 @@ noteSchema = mongoose.Schema
     type: Date
     default: Date.now
 
+noteSchema.statics.getList = (sort, page, pageSize, next) ->
+
+
 module.exports = mongoose.model 'Note', noteSchema
