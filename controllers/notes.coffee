@@ -7,5 +7,5 @@ module.exports = (Note) ->
     Note.findOne {permalink: permalink}, next
 
   getList: (sort = 'date', pageSize = 10, page = 1, next) ->
-    query = Note.sort(sort).skip((page - 1) * pageSize).limit(pageSize)
+    query = Note.find().sort(sort).skip((page - 1) * pageSize).limit(pageSize)
     query.exec next
