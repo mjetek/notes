@@ -27,5 +27,7 @@ noteSchema.statics.getList = (sort, page, pageSize, next) ->
     .limit(pageSize)
     .exec next
 
+noteSchema.statics.getByPermalink = (permalink, next) ->
+  this.findOne permalink : permalink, next
 
 module.exports = mongoose.model 'Note', noteSchema

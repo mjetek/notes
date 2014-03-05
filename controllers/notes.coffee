@@ -1,13 +1,14 @@
 module.exports = (Note) ->
-  create: (note, next) ->
-    Note.create note, next
+  create: (req, res) ->
+    res.render 'notes/create'
 
-  getByPermalink: (permalink, next) ->
-    Note.findOne {permalink: permalink}, next
+  doCreate: (req, res) ->
+    Note.create req.body, next
 
-  getList: (sort = 'date', pageSize = 10, page = 1, next) ->
-    query = Note.find().sort(sort).skip((page - 1) * pageSize).limit(pageSize)
-    query.exec next
+  getByPermalink: (req, res) ->
+    Note.getByPermalink req.params.permalink, (err, note) ->
+      throw err if err
+      res.jsonp note
 
   getNotes: (req, res) ->
     sort = req.query.sort ? 'date'
