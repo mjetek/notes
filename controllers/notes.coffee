@@ -13,3 +13,6 @@ module.exports = (Note) ->
     sort = req.query.sort ? 'date'
     page = req.query.page ? 1
     pageSize = req.query.pageSize ? 10
+    Note.getList sort, page, pageSize, (err, notes) ->
+      throw err if err
+      res.jsonp(notes)

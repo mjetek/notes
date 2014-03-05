@@ -39,10 +39,10 @@ userSchema.pre 'save', (next) ->
   return next()
 
 userSchema.methods.verifyPassword = (password, next) ->
-  return next null, passwordHash.verify password, @password
+  next null, passwordHash.verify password, @password
 
 userSchema.statics.usernameAvailable = (username, next) ->
-  return this.find({username: username}, {_id: 1}).lean().exec (err, userIds) ->
+  this.find({username: username}, {_id: 1}).lean().exec (err, userIds) ->
     return next err if err
     return next null, userIds.length is 0
 

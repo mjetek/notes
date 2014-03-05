@@ -21,6 +21,11 @@ noteSchema = mongoose.Schema
     default: Date.now
 
 noteSchema.statics.getList = (sort, page, pageSize, next) ->
+  this.find()
+    .sort(sort)
+    .skip((page-1)*pageSize)
+    .limit(pageSize)
+    .exec next
 
 
 module.exports = mongoose.model 'Note', noteSchema

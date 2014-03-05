@@ -1,21 +1,12 @@
-passport = require 'passport'
+auth = require '../controllers/auth'
 
-exports.login = (req, res) ->
-  res.render 'login'
+module.exports = (app) ->
+  app.get '/login', auth.login
+  app.post '/login', auth.doLogin
+  app.get '/logout', auth.logout
 
-callbackConfig =
-  successRedirect: '/'
-  failureRedirect: '/login'
-  failureFlash: true
+  app.get '/auth/facebook', auth.facebook
+  app.get '/auth/facebook/callback', auth.facebookCb
 
-exports.doLogin = passport.authenticate 'local', callbackConfig
-
-exports.facebook = passport.authenticate 'facebook'
-exports.facebookCb = passport.authenticate 'facebook', callbackConfig
-
-exports.google = passport.authenticate 'google'
-exports.googleCb = passport.authenticate 'google', callbackConfig
-
-exports.logout = (req, res) ->
-  req.logout()
-  res.redirect '/'
+  app.get '/auth/google', auth.google
+  app.get '/auth/google/callback', auth.googleCb
