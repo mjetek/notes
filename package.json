@@ -60,7 +60,8 @@
     "mocha": "^1.17.1",
     "karma-mocha": "^0.1.1",
     "grunt-mocha-test": "^0.9.4",
-    "coffee-script": "^1.7.1"
+    "coffee-script": "^1.7.1",
+    "grunt-script-tags": "^0.1.1"
   },
   "engines": {
     "node": ">=0.8.0"

@@ -325,6 +325,17 @@ module.exports = function (grunt) {
       }
     },
 
+    script_tags: {
+      options: {
+        root: 'scripts'
+      },
+      dist: {
+        files: {
+          'views/layout.jade': ['.tmp/**/*.js']
+        }
+      }
+    },
+
     // Replace Google CDN references
     cdnify: {
       dist: {
@@ -459,6 +470,7 @@ module.exports = function (grunt) {
       'clean:server',
       // 'replace',
       'bowerInstall',
+      'script_tags',
       'concurrent:server',
       'autoprefixer',
       'concurrent:debug'

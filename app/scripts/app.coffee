@@ -9,7 +9,10 @@ angular.module('notes2App', [
   .config ($routeProvider) ->
     $routeProvider
       .when '/',
-        templateUrl: 'views/main.html'
+        templateUrl: 'notes'
+        controller: 'MainCtrl'
+      .when '/notes/create',
+        templateUrl: 'notes/create'
         controller: 'MainCtrl'
       .otherwise
         redirectTo: '/'
