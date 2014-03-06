@@ -1,4 +1,6 @@
 mongoose = require 'mongoose'
+friendly = require 'mongoose-friendly'
+paginate = require 'mongoose-paginate'
 
 noteSchema = mongoose.Schema
   title:
@@ -11,23 +13,19 @@ noteSchema = mongoose.Schema
     type: mongoose.Schema.Types.ObjectId
     ref: 'User'
     required: yes
-  permalink:
-    type: String
-    required: yes
-    index:
-      unique: yes
   time:
     type: Date
     default: Date.now
 
-noteSchema.statics.getList = (sort, page, pageSize, next) ->
-  this.find()
-    .sort(sort)
-    .skip((page-1)*pageSize)
-    .limit(pageSize)
-    .exec next
+noteSchema.plugin friendly
+noteSchema.plugin paginate
 
-noteSchema.statics.getByPermalink = (permalink, next) ->
-  this.findOne permalink : permalink, next
+noteSchema.statics.getList = (sort, page, pageSize, next) ->
+  this.paginate {}, page, pageSize, next sortBy: sort
+  # this.find()
+  #   .sort(sort)
+  #   .skip((page-1)*pageSize)
+  #   .limit(pageSize)
+  #   .exec next
 
 module.exports = mongoose.model 'Note', noteSchema

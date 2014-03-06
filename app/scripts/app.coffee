@@ -16,6 +16,6 @@ angular.module('notes2App', [
         controller: 'NotesListCtrl'
       .when '/notes/create',
         templateUrl: 'views/notes/create'
-        controller: 'MainCtrl'
+        controller: 'NotesCreateCtrl'
       .otherwise
         redirectTo: '/'
