@@ -1,0 +1,9 @@
+table
+  thead
+    tr
+      th Title
+      th Date
+  tbody
+    tr(ng-repeat='note in notes')
+      td {{note.title}}
+      td {{note.date}}

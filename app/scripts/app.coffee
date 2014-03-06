@@ -11,8 +11,11 @@ angular.module('notes2App', [
       .when '/',
         templateUrl: 'notes'
         controller: 'MainCtrl'
+      .when '/notes',
+        templateUrl: 'views/notes'
+        controller: 'NotesListCtrl'
       .when '/notes/create',
-        templateUrl: 'notes/create'
+        templateUrl: 'views/notes/create'
         controller: 'MainCtrl'
       .otherwise
         redirectTo: '/'

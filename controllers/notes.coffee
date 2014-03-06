@@ -10,6 +10,9 @@ module.exports = (Note) ->
       throw err if err
       res.jsonp note
 
+  viewNotes: (req, res) ->
+    res.render ('notes/list')
+
   getNotes: (req, res) ->
     sort = req.query.sort ? 'date'
     page = req.query.page ? 1
