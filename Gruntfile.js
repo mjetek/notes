@@ -470,8 +470,8 @@ module.exports = function (grunt) {
       'clean:server',
       // 'replace',
       'bowerInstall',
-      'script_tags',
       'concurrent:server',
+      'script_tags',
       'autoprefixer',
       'concurrent:debug'
     ]);
