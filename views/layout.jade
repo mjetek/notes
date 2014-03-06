@@ -7,7 +7,7 @@ html
     // bower:css
     link(rel='stylesheet', href='app/bower_components/foundation/css/foundation.css')
     // endbower
-  body
+  body(ng-app='notes2App')
     .row
       .large-9.columns
         if currentUser
@@ -15,7 +15,9 @@ html
           a(href='/logout') logout
         else
           a(href='/login') login
-    block content
+    .row
+      .large-9.columns(ng-view='')
+        block content
 
     // bower:js
     script(src='app/bower_components/modernizr/modernizr.js')
