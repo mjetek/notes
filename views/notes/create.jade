@@ -1,12 +1,12 @@
-form
+form(ng-submit='save()')
   .row
     .large-12.columns
       label(for='title') Title
-      input(type='text', placeholder='Title')
+      input(type='text', placeholder='Title', ng-model='note.title')
   .row
     .large-12.columns
       label(for='note') Note
-      textarea(placeholder='Your note')
+      textarea(placeholder='Your note', ng-model='note.content')
   .row
     .large-12.columns
       input(type='submit').button

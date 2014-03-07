@@ -16,8 +16,7 @@ html
         else
           a(href='/login') login
     .row
-      .large-9.columns(ng-view='')
-        block content
+      block content
 
     // bower:js
     script(src='app/bower_components/modernizr/modernizr.js')
@@ -39,5 +38,5 @@ html
     script(type='text/javascript', src='scripts/controllers/main.js')
     script(type='text/javascript', src='scripts/controllers/notes-create.js')
     script(type='text/javascript', src='scripts/controllers/notes-list.js')
-    script(type='text/javascript', src='scripts/services/notes.js')
+    script(type='text/javascript', src='scripts/services/note.js')
     //- END_PRINT_SCRIPTS

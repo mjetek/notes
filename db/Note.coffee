@@ -18,14 +18,13 @@ noteSchema = mongoose.Schema
     default: Date.now
 
 noteSchema.plugin friendly
-noteSchema.plugin paginate
 
 noteSchema.statics.getList = (sort, page, pageSize, next) ->
-  this.paginate {}, page, pageSize, next sortBy: sort
-  # this.find()
-  #   .sort(sort)
-  #   .skip((page-1)*pageSize)
-  #   .limit(pageSize)
-  #   .exec next
+  # this.paginate {}, page, pageSize, next
+  this.find()
+    .sort(sort)
+    .skip((page-1)*pageSize)
+    .limit(pageSize)
+    .exec next
 
 module.exports = mongoose.model 'Note', noteSchema

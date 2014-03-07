@@ -1,9 +1,7 @@
 'use strict'
 
 angular.module('notes2App')
-  .controller 'NotesCreateCtrl', ($scope) ->
-    $scope.awesomeThings = [
-      'HTML5 Boilerplate'
-      'AngularJS'
-      'Karma'
-    ]
+  .controller 'NotesCreateCtrl', ($scope, Note) ->
+    $scope.note = new Note()
+    $scope.save = ->
+      $scope.note.$save()

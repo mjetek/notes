@@ -3,7 +3,11 @@ module.exports = (Note) ->
     res.render 'notes/create'
 
   doCreate: (req, res) ->
-    Note.create req.body, next
+    note = req.body
+    note.author = req.user
+    Note.create req.body, (err, note) ->
+      throw err if err
+      res.jsonp note
 
   getByPermalink: (req, res) ->
     Note.getByPermalink req.params.permalink, (err, note) ->
@@ -14,9 +18,9 @@ module.exports = (Note) ->
     res.render ('notes/list')
 
   getNotes: (req, res) ->
-    sort = req.query.sort ? 'date'
+    sort = req.query.sort ? 'time'
     page = req.query.page ? 1
     pageSize = req.query.pageSize ? 10
     Note.getList sort, page, pageSize, (err, notes) ->
       throw err if err
-      res.jsonp(notes)
+      res.jsonp notes

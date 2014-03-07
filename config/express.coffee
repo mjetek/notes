@@ -24,6 +24,8 @@ module.exports = (app, passport) ->
   app.use app.router
   app.use '/app', express.static(path.join __dirname, '../app')
   app.use '/scripts', express.static(path.join __dirname, '../.tmp/scripts')
+  app.use '/scripts', express.static(path.join __dirname, '../app/scripts')
+
 
   app.set 'port', config.port
   app.set 'views', path.join(__dirname, '../views')
