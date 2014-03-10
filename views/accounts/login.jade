@@ -1,0 +1,19 @@
+h3 log in
+form(name='form')
+  .row
+    label(for='username') User name
+      input(type='text', id='username' name='username', placeholder='User name')
+  .row
+    label(for='password') Password
+      input(type='password', id='password', name='password', placeholder='Password')
+      a(href='#') lost your password?
+  .row
+    .left
+      input(type='submit', value='Log in').button.small.radius
+      |&nbsp;
+      input(type='button', value='Register').button.small.radius
+    .right
+      |or login using &nbsp;
+      a(href='/auth/google').button.small.radius.google Google
+      |&nbsp;
+      a(href='/auth/facebook').button.small.radius.facebook Facebook

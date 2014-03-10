@@ -1,0 +1,20 @@
+h2 Register new user
+form(name='form')
+  .row
+    label User name
+      input(type='text', id='username', name='username', placeholder='User name')
+    small.error User name contains illegal characters
+  .row
+    label Email
+      input(type='email', id='email', name='email', placeholder='Email')
+    small.error Invalid email address
+  .row
+    label Password
+      input(type='password', id='password', name='password', placeholder='Password')
+    small.error Password is too short
+  .row
+    label Confirm password
+      input(type='password', id='password-confirm', placeholder='Confirm password')
+    small.error Password doesn't match
+  .row
+    input(type='submit', value='Register')
