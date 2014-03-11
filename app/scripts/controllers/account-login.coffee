@@ -1,9 +1,7 @@
 angular.module('account')
   .controller 'LoginCtrl', ($scope, $http) ->
-    $scope.loginModel =
+    $scope.user =
       username: ''
       password: ''
-    $scope.login: ->
+    $scope.login = ->
       $http.post '/login', ->
-        
-

@@ -1,20 +1,33 @@
-h2 Register new user
-form(name='form')
+h3 Register new user
+form(name='form', novalidate='')
   .row
-    label User name
-      input(type='text', id='username', name='username', placeholder='User name')
-    small.error User name contains illegal characters
+    .username-field(ng-class='{error: form.username.$dirty && !form.username.$valid}')
+      label User name
+        input(type='text', ng-model='user.username' id='username', name='username', placeholder='User name', required='', ng-minlength='6' ng-trim='true')
+      small.error(ng-show='form.username.$dirty && form.username.$error.required')
+        |User name is required
+      small.error(ng-show='form.username.$dirty && form.username.$error.ng-minlength')
+        |User name is too short, it must have at least 6 characters
   .row
-    label Email
-      input(type='email', id='email', name='email', placeholder='Email')
-    small.error Invalid email address
+    .email-field(ng-class='{error: form.email.$dirty && !form.email.$valid}')
+      label Email
+        input(type='email', ng-model='user.email' id='email', name='email', placeholder='Email' required='')
+      small.error(ng-show='form.email.$dirty && form.email.$error.required')
+        |Email address is required
+      small.error(ng-show='form.email.$dirty && form.email.$error.email')
+        |It is not a valid email address
   .row
-    label Password
-      input(type='password', id='password', name='password', placeholder='Password')
-    small.error Password is too short
+    .password-field(ng-class='{error: form.password.$dirty && !form.password.$valid}')
+      label Password
+        input(type='password', ng-model='user.password' id='password', name='password', placeholder='Password', ng-minlength='6' required='')
+      small.error(ng-show='form.password.$dirty && form.password.$error.required')
+        |Password is required
+      small.error(ng-show='form.password.$dirty && form.password.$error.minlength')
+        |Password is too short, it must have at least 6 characters
   .row
-    label Confirm password
-      input(type='password', id='password-confirm', placeholder='Confirm password')
-    small.error Password doesn't match
+    .password-confirm-field(ng-class='{error: form.password-confirm.$dirty && !form.password-confirm.$valid}')
+      label Confirm password
+        input(type='password', id='password-confirm', name='password-confirm' placeholder='Confirm password', required='')
+      small.error(ng-show='form.password-confirm.$dirty && form.password-confirm.$error.required')
   .row
     input(type='submit', value='Register')

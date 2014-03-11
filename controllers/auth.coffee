@@ -1,7 +1,16 @@
 passport = require 'passport'
 
 exports.login = (req, res) ->
-  res.render 'login'
+  res.render 'accounts/index'
+
+exports.loginView = (req, res) ->
+  res.render 'accounts/login'
+
+exports.registerView = (req, res) ->
+  res.render 'accounts/register'
+
+exports.resetPasswordView = (req, res) ->
+  res.render 'accounts/reset-password'
 
 callbackConfig =
   successRedirect: '/'

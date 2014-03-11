@@ -11,6 +11,7 @@ html
         h1 Notes
     .row
       .large-9.columns(ng-view='')
+    script(src='app/bower_components/angular/angular.js')
     script(src='app/bower_components/angular-resource/angular-resource.js')
     script(src='app/bower_components/angular-cookies/angular-cookies.js')
     script(src='app/bower_components/angular-sanitize/angular-sanitize.js')
@@ -18,3 +19,5 @@ html
 
     script(type='text/javascript', src='scripts/account.js')
     script(type='text/javascript', src='scripts/controllers/account-login.js')
+    script(type='text/javascript', src='scripts/controllers/register.js')
+    script(type='text/javascript', src='scripts/controllers/reset-password.js')
