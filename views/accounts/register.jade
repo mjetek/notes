@@ -1,5 +1,5 @@
 h3 Register new user
-form(name='form', novalidate='')
+form(name='form', ng-submit='register()', novalidate='')
   .row
     .username-field(ng-class='{error: form.username.$dirty && !form.username.$valid}')
       label User name

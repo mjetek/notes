@@ -31,9 +31,15 @@ userSchema = mongoose.Schema
   twitter: {}
   google: {}
 
+userSchema.pre 'validate', (next) ->
+  user = this
+  return next() if user.provider? or not user.isModified 'username'
+  user.displayName = user.username
+  next()
+
 userSchema.pre 'save', (next) ->
   user = this
-  return next() if (not user.isModified 'password') or not password?
+  return next() if (not user.isModified 'password') or not user.password?
 
   user.password = passwordHash.generate user.password
   return next()

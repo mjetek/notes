@@ -1,9 +1,12 @@
-auth = require '../controllers/auth'
+User = require '../db/User'
+passport = require 'passport'
+auth = require('../controllers/auth') passport, User
 
-module.exports = (app) ->
+module.exports = (app, passport) ->
   app.get '/login', auth.login
   app.post '/login', auth.doLogin
   app.get '/logout', auth.logout
+  app.post '/auth/register', auth.register
 
   app.get '/views/auth/login', auth.loginView
   app.get '/views/auth/register', auth.registerView

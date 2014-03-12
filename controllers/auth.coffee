@@ -1,30 +1,35 @@
-passport = require 'passport'
+module.exports = (passport, User) ->
+  callbackConfig =
+    successRedirect: '/'
+    failureRedirect: '/login'
+    failureFlash: true
 
-exports.login = (req, res) ->
-  res.render 'accounts/index'
+  login : (req, res) ->
+    res.render 'accounts/index'
 
-exports.loginView = (req, res) ->
-  res.render 'accounts/login'
+  loginView : (req, res) ->
+    res.render 'accounts/login'
 
-exports.registerView = (req, res) ->
-  res.render 'accounts/register'
+  registerView : (req, res) ->
+    res.render 'accounts/register'
 
-exports.resetPasswordView = (req, res) ->
-  res.render 'accounts/reset-password'
+  register : (req, res) ->
+    User.create req.body, (err, user)->
+      return res.jsonp err if err
+      res.jsonp user
 
-callbackConfig =
-  successRedirect: '/'
-  failureRedirect: '/login'
-  failureFlash: true
+  resetPasswordView : (req, res) ->
+    res.render 'accounts/reset-password'
 
-exports.doLogin = passport.authenticate 'local', callbackConfig
 
-exports.facebook = passport.authenticate 'facebook'
-exports.facebookCb = passport.authenticate 'facebook', callbackConfig
+  doLogin : passport.authenticate 'local', callbackConfig
 
-exports.google = passport.authenticate 'google'
-exports.googleCb = passport.authenticate 'google', callbackConfig
+  facebook : passport.authenticate 'facebook'
+  facebookCb : passport.authenticate 'facebook', callbackConfig
 
-exports.logout = (req, res) ->
-  req.logout()
-  res.redirect '/'
+  google : passport.authenticate 'google'
+  googleCb : passport.authenticate 'google', callbackConfig
+
+  logout : (req, res) ->
+    req.logout()
+    res.redirect '/'
