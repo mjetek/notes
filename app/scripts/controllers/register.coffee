@@ -4,3 +4,4 @@ angular.module('account')
       username: ''
       email: ''
       password: ''
+      confirmPassword: ''
