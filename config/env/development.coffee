@@ -9,3 +9,12 @@ module.exports =
     appSecret: 'PhJahyLeWxrf4wDLwy9pW1xN'
   session:
     secretKey: 'f3bd59cdb9ac9850cdfa6ecc8ed6ec06'
+  mailer:
+    from: 'mjetek@gmail.com'
+    host: 'smtp.gmail.com'
+    secureConnection: yes
+    port: 465
+    transportMethod: 'SMTP'
+    auth:
+      user: 'mjetek@gmail.com'
+      pass: 'mtk160##'

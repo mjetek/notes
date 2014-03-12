@@ -1,4 +1,4 @@
-module.exports = (passport, User) ->
+module.exports = (passport, User, mailer) ->
   callbackConfig =
     successRedirect: '/'
     failureRedirect: '/login'
@@ -14,8 +14,15 @@ module.exports = (passport, User) ->
     res.render 'accounts/register'
 
   register : (req, res) ->
+    user = req.body
+    user.displayName = 
     User.create req.body, (err, user)->
       return res.jsonp err if err
+      mailer.send 'email/registration-confirm', {
+          to: user.email
+          subject: 'Confirm your email address'
+        }, (err) -> 
+          throw err if err
       res.jsonp user
 
   resetPasswordView : (req, res) ->

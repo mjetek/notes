@@ -4,11 +4,13 @@ http = require 'http'
 path = require 'path'
 fs = require 'fs'
 passport = require 'passport'
+mailer = require 'express-mailer'
 
 app = express()
 
 require('./config/passport') passport
 require('./config/express') app, passport
+require('./config/mailer') app, mailer
 
 console.log __dirname
 routesPath = path.join(__dirname, 'routes')

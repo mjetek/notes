@@ -14,7 +14,8 @@
     "logfmt": "~0.20.0",
     "passport-google-oauth": "~0.1.5",
     "mongoose-friendly": "^0.1.4",
-    "mongoose-paginate": "^1.2.0"
+    "mongoose-paginate": "^1.2.0",
+    "express-mailer": "^0.2.3"
   },
   "devDependencies": {
     "grunt": "~0.4.1",
