@@ -47,7 +47,10 @@ module.exports = (passport, User, mailer) ->
       user.active = yes
       user.activationToken = undefined
       user.save ->
-        res.redirect '/auth/confirm-success'
+        res.redirect '/login/#confirm-success'
+
+  confirmSuccessView: (req, res) ->
+    res.render 'accounts/confirm-success'
 
   resetPasswordView : (req, res) ->
     res.render 'accounts/reset-password'

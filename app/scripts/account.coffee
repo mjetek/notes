@@ -11,6 +11,8 @@ angular.module('account', [
       .when '/register',
         templateUrl: 'views/auth/register'
         controller: 'RegisterCtrl'
+      .when '/confirm-success',
+        templateUrl: '/vies/auth/confirm-success'
       .when '/reset-password',
         templateUrl: 'views/auth/reset-password'
         controller: 'ResetPasswordController'
