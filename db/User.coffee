@@ -1,5 +1,6 @@
 mongoose = require 'mongoose'
 passwordHash = require 'password-hash'
+crypto = require 'crypto'
 
 userSchema = mongoose.Schema
   username:
@@ -22,10 +23,16 @@ userSchema = mongoose.Schema
     required: yes
   email:
     type: String
-  active: Boolean
+  active:
+    type: Boolean
+    default: no
   registrationTime:
     type: Date
     default: Date.now
+  activationToken:
+    type: String
+    index:
+      sparse: yes
   provider: String
   facebook: {}
   twitter: {}
@@ -36,6 +43,19 @@ userSchema.pre 'validate', (next) ->
   return next() if user.provider? or not user.isModified 'username'
   user.displayName = user.username
   next()
+
+userSchema.pre 'save', (next) ->
+  user = this
+  if user.provider?
+    user.active = yes
+    return next()
+
+  if user.isModified 'email'
+    crypto.randomBytes 24, (ex, buf) ->
+      user.activationToken = buf.toString 'hex'
+      return next()
+
+  else next()
 
 userSchema.pre 'save', (next) ->
   user = this

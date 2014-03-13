@@ -9,6 +9,8 @@ module.exports = (app) ->
   app.get '/logout', auth.logout
   app.post '/auth/register', auth.register
 
+  app.get '/auth/confirm', auth.confirmToken
+
   app.get '/views/auth/login', auth.loginView
   app.get '/views/auth/register', auth.registerView
   app.get '/views/auth/reset-password', auth.resetPasswordView
