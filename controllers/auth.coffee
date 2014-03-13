@@ -22,6 +22,8 @@ module.exports = (passport, User, mailer) ->
           to: user.email
           subject: 'Confirm your email address'
         }, (err) -> 
+          console.log "failed to send email: #{err}"
+          console.dir err
           throw err if err
       res.jsonp user
 

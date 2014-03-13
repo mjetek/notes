@@ -16,5 +16,5 @@ module.exports =
     port: 465
     transportMethod: 'SMTP'
     auth:
-      user: 'mjetek@gmail.com'
+      user: 'mjetek'
       pass: 'mtk160##'

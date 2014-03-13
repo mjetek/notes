@@ -1,4 +1,4 @@
 config = require './index'
 
 module.exports = (app, mailer) ->
-  mailer.extends app, config.mailer
+  mailer.extend app, config.mailer

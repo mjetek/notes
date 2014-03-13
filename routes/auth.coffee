@@ -1,8 +1,9 @@
-User = require '../db/User'
 passport = require 'passport'
+User = require '../db/User'
 
-module.exports = (app, passport) ->
+module.exports = (app) ->
   auth = require('../controllers/auth') passport, User, app.mailer
+  
   app.get '/login', auth.login
   app.post '/login', auth.doLogin
   app.get '/logout', auth.logout
