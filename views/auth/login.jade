@@ -1,0 +1,23 @@
+h3 log in
+form(name='form', novalidate='')
+  .row
+    .username-field(ng-class='{error: (form.username.$dirty && !form.username.$valid)}')
+      label(for='username') User name
+        input(type='text', id='username' name='username', placeholder='User name', ng-model='user.username', required)
+      small.error(ng-show='form.username.$dirty && form.username.$error.required') User name is required
+  .row
+    .password-field(ng-class='{error: (form.password.$dirty && !form.password.$valid)}')
+      label(for='password') Password
+        input(type='password', id='password', name='password', placeholder='Password', ng-model='user.password', required)
+      small.error(ng-show='form.password.$dirty && form.password.$error.required') Password is required
+      a(href='#/reset-password') lost your password?
+  .row
+    .left
+      input(type='submit', value='Log in').button.small.radius
+      |&nbsp;
+      a(href='#/register').button.small.radius Register
+    .right
+      |or login using &nbsp;
+      a(href='/auth/google').button.small.radius.google Google
+      |&nbsp;
+      a(href='/auth/facebook').button.small.radius.facebook Facebook
