@@ -1,7 +1,7 @@
 'use strict'
 # Based on: 
 # http://ericpanorel.net/2013/10/05/angularjs-password-match-form-validation/
-angular.module('account')
+angular.module('auth')
   .directive('ngMatch', ($parse) ->
     restrict: 'A'
     require: '?ngModel'

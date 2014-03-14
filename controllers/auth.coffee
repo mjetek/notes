@@ -8,13 +8,13 @@ module.exports = (passport, User, mailer) ->
     failureFlash: true
 
   login : (req, res) ->
-    res.render 'accounts/index'
+    res.render 'auth/index'
 
   loginView : (req, res) ->
-    res.render 'accounts/login'
+    res.render 'auth/login'
 
   registerView : (req, res) ->
-    res.render 'accounts/register'
+    res.render 'auth/register'
 
   register : (req, res) ->
     user = req.body
@@ -50,10 +50,10 @@ module.exports = (passport, User, mailer) ->
         res.redirect '/login/#confirm-success'
 
   confirmSuccessView: (req, res) ->
-    res.render 'accounts/confirm-success'
+    res.render 'auth/confirm-success'
 
   resetPasswordView : (req, res) ->
-    res.render 'accounts/reset-password'
+    res.render 'auth/reset-password'
 
   doLogin : passport.authenticate 'local', callbackConfig
 

@@ -1,4 +1,4 @@
-angular.module('account')
+angular.module('auth')
   .factory 'auth', ($http) ->
     login: (credentials) ->
       q = $http.post '/login', credentials

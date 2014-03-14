@@ -1,4 +1,4 @@
-angular.module('account')
+angular.module('auth')
   .controller 'LoginCtrl', ($scope, $http) ->
     $scope.user =
       username: ''

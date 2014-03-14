@@ -23,6 +23,7 @@ userSchema = mongoose.Schema
     required: yes
   email:
     type: String
+    index: yes
   active:
     type: Boolean
     default: no
