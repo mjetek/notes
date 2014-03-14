@@ -34,6 +34,10 @@ userSchema = mongoose.Schema
     type: String
     index:
       sparse: yes
+  resetPasswordToken:
+    type: String
+    index:
+      sparse: yes
   provider: String
   facebook: {}
   twitter: {}
@@ -64,6 +68,13 @@ userSchema.pre 'save', (next) ->
 
   user.password = passwordHash.generate user.password
   return next()
+
+userSchema.methods.setTokenForResetingPassword: (next) ->
+  user = this
+  crypto.randomBytes 24, (ex, buf) ->
+    user.resetPasswordToken buf.toString 'hex'
+    next user
+
 
 userSchema.methods.verifyPassword = (password, next) ->
   next null, passwordHash.verify password, @password

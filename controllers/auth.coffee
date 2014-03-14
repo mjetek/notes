@@ -1,5 +1,6 @@
 config = require '../config'
 url = require 'url'
+crypto = require 'crypto'
 
 module.exports = (passport, User, mailer) ->
   callbackConfig =
@@ -54,6 +55,20 @@ module.exports = (passport, User, mailer) ->
 
   resetPasswordView : (req, res) ->
     res.render 'auth/reset-password'
+
+  resetPassword : (req, res) ->
+    criteria = req.body
+    User.findOne criteria, (err, user) ->
+      return json error: 'There is no user with a given user name or email address'
+      user.setTokenForResetingPassword (user) ->
+        # todo create module which will generate urls
+        passwordResetUrl = url.format
+          protocol: 'http'
+        mailer.send 'email/reset-password', {
+            to: user.email
+            subject: 'Password reset'
+            url
+          }
 
   doLogin : passport.authenticate 'local', callbackConfig
 
