@@ -4,6 +4,8 @@ dist
 .sass-cache
 app/bower_components
 npm-debug.log
+*.sublime-workspace
+.sublime-grunt.cache
 # keep only app.coffee in repository
 app.js
 

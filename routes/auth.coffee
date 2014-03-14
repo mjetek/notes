@@ -4,7 +4,7 @@ User = require '../db/User'
 module.exports = (app) ->
   auth = require('../controllers/auth') passport, User, app.mailer
   
-  app.get '/login', auth.login
+  app.get '/', auth.login
   app.post '/login', auth.doLogin
   app.get '/logout', auth.logout
   app.post '/auth/register', auth.register

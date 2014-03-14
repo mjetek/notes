@@ -1,4 +1,4 @@
-  'use strict'
+'use strict'
 
 angular.module('notes2App', [
   'ngCookies',
@@ -8,9 +8,6 @@ angular.module('notes2App', [
 ])
   .config ($routeProvider) ->
     $routeProvider
-      .when '/',
-        templateUrl: 'notes'
-        controller: 'MainCtrl'
       .when '/notes',
         templateUrl: 'views/notes'
         controller: 'NotesListCtrl'
@@ -18,4 +15,4 @@ angular.module('notes2App', [
         templateUrl: 'views/notes/create'
         controller: 'NotesCreateCtrl'
       .otherwise
-        redirectTo: '/'
+        redirectTo: '/notes'

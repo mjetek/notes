@@ -8,4 +8,3 @@ module.exports = (app) ->
   app.get '/notes/:permalink', notes.getByPermalink
 
   app.post '/notes', notes.doCreate
-  # app.put '/notes', notes.update
