@@ -1,6 +1,4 @@
-config = require '../config'
-url = require 'url'
-crypto = require 'crypto'
+urls = require '../misc/urls'
 
 module.exports = (passport, User, mailer) ->
   callbackConfig =
@@ -23,13 +21,7 @@ module.exports = (passport, User, mailer) ->
     User.create req.body, (err, user)->
       return res.json err if err
 
-      confirmationUrl = url.format
-        protocol: 'http'
-        hostname: config.host
-        port: config.port
-        pathname: '/auth/confirm'
-        query:
-          token: user.activationToken
+      confirmationUrl = urls.url '/auth/confirm', token: user.activationToken
       mailer.send 'email/registration-confirm', {
           to: user.email
           subject: 'Confirm your email address'
@@ -62,13 +54,13 @@ module.exports = (passport, User, mailer) ->
       return json error: 'There is no user with a given user name or email address'
       user.setTokenForResetingPassword (user) ->
         # todo create module which will generate urls
-        passwordResetUrl = url.format
-          protocol: 'http'
+        passwordResetUrl = urls.url 'auth/reset-password-finish', token: user.resetPasswordToken
         mailer.send 'email/reset-password', {
             to: user.email
             subject: 'Password reset'
-            url
-          }
+            url: passwordResetUrl
+          }, (err) ->
+            console.log "Failed to send an email: #{err}"
 
   doLogin : passport.authenticate 'local', callbackConfig
 
