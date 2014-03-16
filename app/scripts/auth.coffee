@@ -1,7 +1,8 @@
 angular.module('auth', [
   'ngRoute',
+  'ngResource',
   'ngCookies',
-  'ngSanitize'
+  'ngSanitize',
 ])
   .config ($routeProvider) ->
     $routeProvider
@@ -15,6 +16,6 @@ angular.module('auth', [
         templateUrl: '/vies/auth/confirm-success'
       .when '/reset-password',
         templateUrl: 'views/auth/reset-password'
-        controller: 'ResetPasswordController'
+        controller: 'ResetPasswordCtrl'
       .otherwise
         redirectTo: '/'

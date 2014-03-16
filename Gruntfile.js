@@ -37,7 +37,7 @@ module.exports = function (grunt) {
         script: 'app.coffee',
         options: {
           args: ['dev'],
-          nodeArgs: ['--nodejs', '--debug'],
+          // nodeArgs: ['--nodejs', '--debug'],
           env: {
             NODE_ENV: 'development',
             PORT: '3000',

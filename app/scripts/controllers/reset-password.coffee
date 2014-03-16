@@ -1,7 +1,7 @@
 angular.module('auth')
-  .controller 'ResetPasswordCtrl', ($scope, auth) ->
+  .controller 'ResetPasswordCtrl', ($scope, $location, auth) ->
     $scope.user =
-      userName: ''
+      username: ''
       email: ''
     $scope.reset = ->
       auth.resetPassword($scope.user)

@@ -9,6 +9,6 @@ exports.url = (pathname, query, options) ->
     port: config.port
 
   urlObj = _.assign defaultOptions, options ? {}
-  _assign urlObj, {pathname, query}
+  _.assign urlObj, {pathname, query}
 
   url.format urlObj
