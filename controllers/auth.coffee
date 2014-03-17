@@ -64,6 +64,9 @@ module.exports = (passport, User, mailer) ->
             }, (err) ->
               console.log "Failed to send an email: #{err}"
 
+  changePasswordView: (req, res) ->
+    res.render 'auth/change-password'
+
   #todo: this is not necessary can redirect to change password immediately with token
   finishResetPassword : (req, res) ->
     token = req.query.token

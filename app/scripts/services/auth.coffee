@@ -7,5 +7,8 @@ angular.module('auth')
     register: (user) ->
       $http.post '/auth/register', user
 
+    changePassword: (data) ->
+      $http.post '/auth/change-password', data
+
     resetPassword: (user) ->
       $http.post '/auth/reset-password', user

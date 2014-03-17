@@ -14,10 +14,11 @@ module.exports = (app) ->
   app.get '/views/auth/login', auth.loginView
   app.get '/views/auth/register', auth.registerView
   app.get '/views/auth/reset-password', auth.resetPasswordView
+  app.get '/views/auth/change-password', auth.changePasswordView
   app.get '/views/auth/confirm-success', auth.confirmSuccessView
 
   app.post '/auth/reset-password', auth.resetPassword
-  app.get '/auth/reset-password', auth.finishResetPasword
+  # app.get '/auth/reset-password', auth.finishResetPasword
 
   app.get '/auth/facebook', auth.facebook
   app.get '/auth/facebook/callback', auth.facebookCb

@@ -2,7 +2,7 @@ h3 log in
 form(name='form', novalidate='')
   .row
     .username-field(ng-class='{error: (form.username.$dirty && !form.username.$valid)}')
-      label(for='username') User name
+      label User name
         input(type='text', id='username' name='username', placeholder='User name', ng-model='user.username', required)
       small.error(ng-show='form.username.$dirty && form.username.$error.required') User name is required
   .row

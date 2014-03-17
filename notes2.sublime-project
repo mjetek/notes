@@ -1,0 +1,17 @@
+{
+	"folders":
+	[
+		{
+			"folder_exclude_patterns":
+			[
+				".sass-cache",
+				".tmp",
+				"dist",
+				"node_modules",
+				"app/bower_components"
+			],
+			"follow_symlinks": true,
+			"path": "."
+		}
+	]
+}

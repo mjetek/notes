@@ -1,3 +1,5 @@
+'use strict'
+
 angular.module('auth')
   .controller 'ResetPasswordCtrl', ($scope, $location, auth) ->
     $scope.user =
