@@ -1,3 +1,4 @@
+_ = require 'lodash'
 urls = require '../misc/urls'
 
 module.exports = (passport, User, mailer) ->
@@ -50,17 +51,28 @@ module.exports = (passport, User, mailer) ->
 
   resetPassword : (req, res) ->
     criteria = req.body
-    User.findOne criteria, (err, user) ->
-      return json error: 'There is no user with a given user name or email address'
+    User.findOne _.omit(criteria, (value) -> not value), (err, user) ->
+      return res.json error: 'There is no user with a given user name or email address' if not user?
       user.setTokenForResetingPassword (user) ->
-        # todo create module which will generate urls
-        passwordResetUrl = urls.url 'auth/reset-password-finish', token: user.resetPasswordToken
-        mailer.send 'email/reset-password', {
-            to: user.email
-            subject: 'Password reset'
-            url: passwordResetUrl
-          }, (err) ->
-            console.log "Failed to send an email: #{err}"
+        user.save (err) ->
+          throw err if err
+          passwordResetUrl = urls.url 'auth/reset-password-finish', token: user.resetPasswordToken
+          mailer.send 'email/reset-password', {
+              to: user.email
+              subject: 'Password reset'
+              url: passwordResetUrl
+            }, (err) ->
+              console.log "Failed to send an email: #{err}"
+
+  #todo: this is not necessary can redirect to change password immediately with token
+  finishResetPassword : (req, res) ->
+    token = req.query.token
+    User.findOne resetPasswordToken: token, (err, user) ->
+      throw err if err
+      return res.redirect 'error/invalid-token' if not user?
+
+      res.redirect "/#change-password?token=#{token}"
+
 
   doLogin : passport.authenticate 'local', callbackConfig
 

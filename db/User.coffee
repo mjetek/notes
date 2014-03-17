@@ -72,7 +72,7 @@ userSchema.pre 'save', (next) ->
 userSchema.methods.setTokenForResetingPassword = (next) ->
   user = this
   crypto.randomBytes 24, (ex, buf) ->
-    user.resetPasswordToken buf.toString 'hex'
+    user.resetPasswordToken = buf.toString 'hex'
     next user
 
 

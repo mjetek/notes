@@ -3,6 +3,7 @@ angular.module('auth')
     $scope.user =
       username: ''
       email: ''
+    console.log 'initialize reset controller'
     $scope.reset = ->
       auth.resetPassword($scope.user)
         .then (result) ->
