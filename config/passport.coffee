@@ -58,7 +58,7 @@ module.exports = (passport) ->
 
 
   passport.serializeUser (user, done) -> done null, user._id
-  passport.deserializeUser (id, done) -> User.findOne({_id: id}, 'displayName').lean().exec (err, user) ->
+  passport.deserializeUser (id, done) -> User.findOne({_id: id}).exec (err, user) ->
     done err, user
 
   passport.use localStrategy

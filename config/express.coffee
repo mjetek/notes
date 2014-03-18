@@ -17,6 +17,7 @@ module.exports = (app, passport) ->
   app.use express.session({secret: config.session.secretKey})
   app.use passport.initialize()
   app.use passport.session()
+  app.use authentication.setUser
 
   app.use (req, res, next) ->
     res.locals.currentUser = req.user

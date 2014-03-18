@@ -86,7 +86,7 @@ userSchema.statics.usernameAvailable = (username, next) ->
 
 userSchema.methods.changePassword = (oldPassword, newPassword, next) ->
   user = this
-  user.verifyPassword oldPassword (err, valid) ->
+  user.verifyPassword oldPassword, (err, valid) ->
     throw err if err
     return next message: 'Invalid password' if not valid
 

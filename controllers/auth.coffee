@@ -70,7 +70,7 @@ module.exports = (passport, User, mailer) ->
   changePassword: (req, res) ->
     data = req.body
     if data.oldPassword
-      req.user.changePassword oldPassword, data.password, (err) ->
+      req.user.changePassword data.oldPassword, data.password, (err) ->
         return res.json err ? success: yes
     User.resetPassword data.token, data.passport, (err) ->
       return res.json err ? success: yes
