@@ -67,15 +67,13 @@ module.exports = (passport, User, mailer) ->
   changePasswordView: (req, res) ->
     res.render 'auth/change-password'
 
-  #todo: this is not necessary can redirect to change password immediately with token
-  finishResetPassword : (req, res) ->
-    token = req.query.token
-    User.findOne resetPasswordToken: token, (err, user) ->
-      throw err if err
-      return res.redirect 'error/invalid-token' if not user?
-
-      res.redirect "/#change-password?token=#{token}"
-
+  changePassword: (req, res) ->
+    data = req.body
+    if data.oldPassword
+      req.user.changePassword oldPassword, data.password, (err) ->
+        return res.json err ? success: yes
+    User.resetPassword data.token, data.passport, (err) ->
+      return res.json err ? success: yes
 
   doLogin : passport.authenticate 'local', callbackConfig
 

@@ -84,4 +84,22 @@ userSchema.statics.usernameAvailable = (username, next) ->
     return next err if err
     return next null, userIds.length is 0
 
+userSchema.methods.changePassword = (oldPassword, newPassword, next) ->
+  user = this
+  user.verifyPassword oldPassword (err, valid) ->
+    throw err if err
+    return next message: 'Invalid password' if not valid
+
+    user.password = newPassword
+    user.save next
+
+userSchema.statics.resetPassword = (token, newPassword, next) ->
+  this.findOne resetPasswordToken: token, (err, user) ->
+    throw err if err
+    return next message: 'Invalid token' if not user?
+
+    user.password = newPassword
+    user.resetPasswordToken = undefined
+    user.save next
+
 module.exports = mongoose.model 'User', userSchema

@@ -1,6 +1,7 @@
 config = require './index'
 path = require 'path'
 express = require 'express'
+authentication = require '../middlewares/authentication'
 
 module.exports = (app, passport) ->
   app.set 'showStackError', on

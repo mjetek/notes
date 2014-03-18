@@ -1,7 +1,7 @@
 angular.module('auth')
-  .controller 'LoginCtrl', ($scope, $http) ->
+  .controller 'LoginCtrl', ($scope, $http, auth) ->
     $scope.user =
       username: ''
       password: ''
     $scope.login = ->
-      $http.post '/login', ->
+      auth.login $scope.user

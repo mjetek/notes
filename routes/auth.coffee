@@ -18,6 +18,7 @@ module.exports = (app) ->
   app.get '/views/auth/confirm-success', auth.confirmSuccessView
 
   app.post '/auth/reset-password', auth.resetPassword
+  app.post '/auth/change-password', auth.changePassword
   # app.get '/auth/reset-password', auth.finishResetPasword
 
   app.get '/auth/facebook', auth.facebook

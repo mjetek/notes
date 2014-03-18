@@ -2,14 +2,15 @@
 
 angular.module('auth')
   .controller 'ChangePasswordCtrl', ($scope, $routeParams, auth) ->
-    $scope.oldPasswordVisible = not $routeParams.token?
     $scope.data = 
       oldPassword: ''
       newPassword: ''
       confirmPassword: ''
-    scope.changePassword = ->
+
+    $scope.changePassword = ->
       data =
-        $scope.data.newPassword
+        password: $scope.data.newPassword
+
       if $routeParams.token?
         data.token = $routeParams.token
       else
