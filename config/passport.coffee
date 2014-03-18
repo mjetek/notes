@@ -14,12 +14,13 @@ module.exports = (passport) ->
   console.dir config
   console.log "baseUrl: #{baseUrl}"
 
-  localStrategy = new LocalStrategy () ->
-    (username, password, done) ->
-      User.findOne {username: username}, (err, user) ->
+  localStrategy = new LocalStrategy (username, password, done) ->
+    User.findOne {username: username}, (err, user) ->
+      return done err if err
+      return done null, no, {message: 'Incorrect username.'} if not user
+      user.verifyPassword password, (err, valid) ->
         return done err if err
-        return done null, no, {message: 'Incorrect username.'} if not user
-        return done null, no, {message: 'Incorrect password.'} if not user.validPassword password
+        return done null, no, {message: 'Incorrect password.'} if not valid
         return done null, user
 
   facebookStrategy = new FacebookStrategy {

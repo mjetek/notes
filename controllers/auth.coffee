@@ -75,7 +75,17 @@ module.exports = (passport, User, mailer) ->
     User.resetPassword data.token, data.passport, (err) ->
       return res.json err ? success: yes
 
-  doLogin : passport.authenticate 'local', callbackConfig
+  doLogin : (req, res, next) ->
+    (passport.authenticate 'local', (err, user, info) ->
+      return next err if err
+      if not user
+        return res.json
+          success: no
+          error: 'Incorect user name or password'
+
+      req.logIn user, (err) ->
+        return next err if err
+        return res.json success: yes) req, res, next
 
   facebook : passport.authenticate 'facebook'
   facebookCb : passport.authenticate 'facebook', callbackConfig
