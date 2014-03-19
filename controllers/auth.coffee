@@ -98,7 +98,7 @@ module.exports = (passport, User, mailer) ->
     res.redirect '/'
 
   usernameAvailable : (req, res) ->
-    User.usernameAvailable req.params.username, (err, available) ->
+    User.usernameAvailable req.body.username, (err, available) ->
       throw err if err
 
       res.json available: available
