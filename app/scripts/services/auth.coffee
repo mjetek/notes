@@ -12,3 +12,6 @@ angular.module('auth')
 
     resetPassword: (user) ->
       $http.post '/auth/reset-password', user
+
+    usernameAvailable: (username) ->
+      $http.get '/auth/username-available'

@@ -8,6 +8,7 @@ userSchema = mongoose.Schema
     required: no
     index:
       unique: yes
+      sparse: yes
     validate: [
       (val) -> val?.length or provider?,
       '{PATH} cannot be empty'
@@ -74,7 +75,6 @@ userSchema.methods.setTokenForResetingPassword = (next) ->
   crypto.randomBytes 24, (ex, buf) ->
     user.resetPasswordToken = buf.toString 'hex'
     next user
-
 
 userSchema.methods.verifyPassword = (password, next) ->
   next null, passwordHash.verify password, @password

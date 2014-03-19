@@ -26,3 +26,5 @@ module.exports = (app) ->
 
   app.get '/auth/google', auth.google
   app.get '/auth/google/callback', auth.googleCb
+
+  app.get '/auth/username-available/:username'

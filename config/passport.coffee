@@ -38,7 +38,7 @@ module.exports = (passport) ->
           provider: 'facebook'
           facebook: profile._json, (err, user) ->
             done err, user
-        return done null, user
+        else return done null, user
 
   googleStrategy = new GoogleStrategy {
       clientID: config.google.appId
@@ -54,7 +54,7 @@ module.exports = (passport) ->
           provider: 'google'
           google: profile._json, (err, user) ->
             done err, user
-        return done null, user
+        else return done null, user
 
 
   passport.serializeUser (user, done) -> done null, user._id

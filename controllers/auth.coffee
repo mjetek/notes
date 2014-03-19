@@ -4,8 +4,8 @@ urls = require '../misc/urls'
 module.exports = (passport, User, mailer) ->
   callbackConfig =
     successRedirect: '/'
-    failureRedirect: '/login'
-    failureFlash: true
+    failureRedirect: '/'
+    failureFlash: no
 
   login : (req, res) ->
     res.render 'auth/index'
@@ -96,3 +96,9 @@ module.exports = (passport, User, mailer) ->
   logout : (req, res) ->
     req.logout()
     res.redirect '/'
+
+  usernameAvailable : (req, res) ->
+    User.usernameAvailable req.params.username, (err, available) ->
+      throw err if err
+
+      res.json available: available
