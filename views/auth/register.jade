@@ -8,6 +8,7 @@ form(name='form', ng-submit='register()', novalidate='')
         |User name is required
       small.error(ng-show='form.username.$dirty && form.username.$error.ng-minlength')
         |User name is too short, it must have at least 6 characters
+      small.error(ng-show='form.username.$dirty && form.username.$error[username-not-available]')
   .row
     .email-field(ng-class='{error: form.email.$dirty && !form.email.$valid}')
       label Email
