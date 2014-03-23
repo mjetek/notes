@@ -3,6 +3,7 @@ angular.module('auth', [
   'ngResource',
   'ngCookies',
   'ngSanitize',
+  'validation'
 ])
   .config ($routeProvider) ->
     $routeProvider

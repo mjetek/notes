@@ -194,7 +194,7 @@ module.exports = function (grunt) {
         {
           expand: true,
           cwd: '<%= yeoman.app %>/scripts',
-          src: '{,*/}*.coffee',
+          src: '**/*.coffee',
           dest: '.tmp/scripts',
           ext: '.js'
         }]
@@ -485,12 +485,9 @@ module.exports = function (grunt) {
     //'karma:unit'
   ]);
 
-  grunt.registerTask('testreplace', ['replace']);
-
   grunt.registerTask('build', [
     'clean:dist',
     'bowerInstall',
-    'replace',
     'useminPrepare',
     'concurrent:dist',
     'autoprefixer',

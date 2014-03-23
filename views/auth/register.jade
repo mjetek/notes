@@ -20,11 +20,12 @@ form(name='form', ng-submit='register()', novalidate='')
   .row
     .password-field(ng-class='{error: form.password.$dirty && !form.password.$valid}')
       label Password
-        input(type='password', ng-model='user.password' id='password', name='password', placeholder='Password', ng-minlength='6' required='')
+        input(type='password', ng-model='user.password' id='password', name='password', placeholder='Password', ng-minlength='6' required='', val-focused='')
       small.error(ng-show='form.password.$dirty && form.password.$error.required')
         |Password is required
       small.error(ng-show='form.password.$dirty && form.password.$error.minlength')
         |Password is too short, it must have at least 6 characters
+      small(ng-show='form.password.$focused') now it's focused
   .row
     .password-confirm-field(ng-class='{error: form[\'password-confirm\'].$dirty && !form[\'password-confirm\'].$valid}')
       label Confirm password
