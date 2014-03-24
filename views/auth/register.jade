@@ -19,6 +19,7 @@ form(name='form', ng-submit='register()', novalidate='')
         |Email address is required
       small.error(ng-show='form.email.$dirty && form.email.$error.email')
         |It is not a valid email address
+      validation-message(val-message-for='email' val-messages='')
   .row
     .password-field(ng-class='{error: form.password.$dirty && !form.password.$valid}')
       label Password
