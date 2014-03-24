@@ -3,12 +3,14 @@ form(name='form', ng-submit='register()', novalidate='')
   .row
     .username-field(ng-class='{error: form.username.$dirty && !form.username.$valid}')
       label User name
-        input(type='text', ng-model='user.username' id='username', name='username', placeholder='User name', required='', ng-minlength='6' ng-trim='true', unique-username='')
+        input(type='text', ng-model='user.username' id='username', name='username', placeholder='User name', required='', ng-minlength='6' ng-trim='true', val-remote='', val-remote-url='/auth/username-available/')
       small.error(ng-show='form.username.$dirty && form.username.$error.required')
         |User name is required
       small.error(ng-show='form.username.$dirty && form.username.$error.ng-minlength')
         |User name is too short, it must have at least 6 characters
-      small.error(ng-show='form.username.$dirty && form.username.$error[username-not-available]')
+      //- small.error(ng-show='form.username.$dirty && form.username.$error[username-not-available]')
+      small.error(ng-show='form.username.$dirty && form.username.$error.remote')
+        |Remote validation error
   .row
     .email-field(ng-class='{error: form.email.$dirty && !form.email.$valid}')
       label Email
