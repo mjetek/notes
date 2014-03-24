@@ -1,7 +1,8 @@
 angular.module('validation')
   .controller 'RemoteValidationController', ($scope, $element, $attrs, $http) ->
     $scope.validate = (value) ->
-      $http.get $scope.valRemoteUrl, value: value
+      $scope.valRemoteUrl += '/' unless $scope.valRemoteUrl[-1..] is '/'
+      $http.get "#{$scope.valRemoteUrl}#{value}"
   .directive 'valRemote', ($timeout) ->
     restrict: 'A'
     require: '?ngModel',
@@ -20,7 +21,7 @@ angular.module('validation')
           (->
             console.log 'timeout'
             scope.validate(value)
-            .then (result) -> ctrl.$setValidity 'remote', result.valid),
+            .then (result) -> ctrl.$setValidity 'remote', result.data.valid),
           1000
         value
 

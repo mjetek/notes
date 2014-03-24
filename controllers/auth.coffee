@@ -101,4 +101,4 @@ module.exports = (passport, User, mailer) ->
     User.usernameAvailable req.params.username, (err, available) ->
       throw err if err
 
-      res.json available: available
+      res.json valid: available
