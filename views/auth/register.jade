@@ -15,11 +15,11 @@ form(name='form', ng-submit='register()', novalidate='')
     .email-field(ng-class='{error: form.email.$dirty && !form.email.$valid}')
       label Email
         input(type='email', ng-model='user.email' id='email', name='email', placeholder='Email' required='')
-      small.error(ng-show='form.email.$dirty && form.email.$error.required')
-        |Email address is required
-      small.error(ng-show='form.email.$dirty && form.email.$error.email')
-        |It is not a valid email address
-      validation-message(val-message-for='email' val-messages='')
+      //- small.error(ng-show='form.email.$dirty && form.email.$error.required')
+      //-   |Email address is required
+      //- small.error(ng-show='form.email.$dirty && form.email.$error.email')
+      //-   |It is not a valid email address
+      validation-message(val-message-for='email' email='Incorrect email address', required='this field is required').error
   .row
     .password-field(ng-class='{error: form.password.$dirty && !form.password.$valid}')
       label Password
