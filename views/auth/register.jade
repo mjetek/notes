@@ -3,39 +3,31 @@ form(name='form', ng-submit='register()', novalidate='')
   .row
     .username-field(ng-class='{error: form.username.$dirty && !form.username.$valid}')
       label User name
-        input(type='text', ng-model='user.username' id='username', name='username', placeholder='User name', required='', ng-minlength='6' ng-trim='true', val-remote='', val-remote-url='/auth/username-available/')
-      small.error(ng-show='form.username.$dirty && form.username.$error.required')
-        |User name is required
-      small.error(ng-show='form.username.$dirty && form.username.$error.ng-minlength')
-        |User name is too short, it must have at least 6 characters
-      //- small.error(ng-show='form.username.$dirty && form.username.$error[username-not-available]')
-      small.error(ng-show='form.username.$dirty && form.username.$error.remote')
-        |Remote validation error
+        input(type='text', ng-model='user.username', id='username', name='username', placeholder='User name', required='', ng-minlength='6' ng-trim='true', val-remote='', val-remote-url='/auth/username-available/')
+      validation-message(val-message-for='username',
+                         required='User name is required',
+                         minlength='User name is too short, it must have at least 6 characters'
+                         remote='This user name is already used by somebody else, choose something else')
   .row
     .email-field(ng-class='{error: form.email.$dirty && !form.email.$valid}')
       label Email
         input(type='email', ng-model='user.email' id='email', name='email', placeholder='Email' required='')
-      //- small.error(ng-show='form.email.$dirty && form.email.$error.required')
-      //-   |Email address is required
-      //- small.error(ng-show='form.email.$dirty && form.email.$error.email')
-      //-   |It is not a valid email address
-      validation-message(val-message-for='email' email='Incorrect email address', required='this field is required').error
+      validation-message(val-message-for='email',
+                         required='Email address is required',
+                         email='Incorrect email address')
   .row
     .password-field(ng-class='{error: form.password.$dirty && !form.password.$valid}')
       label Password
-        input(type='password', ng-model='user.password' id='password', name='password', placeholder='Password', ng-minlength='6' required='', val-focused='')
-      small.error(ng-show='form.password.$dirty && form.password.$error.required')
-        |Password is required
-      small.error(ng-show='form.password.$dirty && form.password.$error.minlength')
-        |Password is too short, it must have at least 6 characters
-      small(ng-show='form.password.$focused') now it's focused
+        input(type='password', ng-model='user.password' id='password', name='password', placeholder='Password', ng-minlength='6' required='')
+      validation-message(val-message-for='password',
+                         required='Password is required'
+                         minlength='Password is too short, it must have at least 6 characters')
   .row
     .password-confirm-field(ng-class='{error: form[\'password-confirm\'].$dirty && !form[\'password-confirm\'].$valid}')
       label Confirm password
         input(type='password', ng-model='user.confirmPassword' id='password-confirm', name='password-confirm' placeholder='Confirm password', required='' ng-match='user.password')
-      small.error(ng-show='form[\'password-confirm\'].$dirty && form[\'password-confirm\'].$error.required')
-        |Confirm your password
-      small.error(ng-show='form[\'password-confirm\'].$dirty && form[\'password-confirm\'].$error.match')
-        |Password doesn't match
+      validation-message(val-message-for='passwordConfirm',
+                         required='Confirm your password',
+                         match='Password doesn\'t match')
   .row
     input(type='submit', value='Register').button.small.radius

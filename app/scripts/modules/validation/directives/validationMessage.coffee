@@ -2,7 +2,7 @@ angular.module('validation')
   .directive 'validationMessage', ($parse, $animate) ->
     restrict: 'E'
     require: '^form'
-    template: '<small class="ng-hide"></small>',
+    template: '<small class="error ng-hide"></small>',
     replace: true
     link: (scope, element, attributes, form) ->
       return unless attributes.valMessageFor
