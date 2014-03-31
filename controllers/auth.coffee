@@ -16,6 +16,28 @@ module.exports = (passport, User, mailer) ->
   registerView : (req, res) ->
     res.render 'auth/register'
 
+  doLogin : (req, res, next) ->
+    (passport.authenticate 'local', (err, user, info) ->
+      return next err if err
+      if not user
+        return res.json
+          success: no
+          error: 'Incorect user name or password'
+
+      req.logIn user, (err) ->
+        return next err if err
+        return res.json success: yes) req, res, next
+
+  facebook : passport.authenticate 'facebook'
+  facebookCb : passport.authenticate 'facebook', callbackConfig
+
+  google : passport.authenticate 'google'
+  googleCb : passport.authenticate 'google', callbackConfig
+
+  logout : (req, res) ->
+    req.logout()
+    res.redirect '/'
+
   register : (req, res) ->
     user = req.body
     user.displayName = 
@@ -74,28 +96,6 @@ module.exports = (passport, User, mailer) ->
         return res.json err ? success: yes
     User.resetPassword data.token, data.password, (err) ->
       return res.json err ? success: yes
-
-  doLogin : (req, res, next) ->
-    (passport.authenticate 'local', (err, user, info) ->
-      return next err if err
-      if not user
-        return res.json
-          success: no
-          error: 'Incorect user name or password'
-
-      req.logIn user, (err) ->
-        return next err if err
-        return res.json success: yes) req, res, next
-
-  facebook : passport.authenticate 'facebook'
-  facebookCb : passport.authenticate 'facebook', callbackConfig
-
-  google : passport.authenticate 'google'
-  googleCb : passport.authenticate 'google', callbackConfig
-
-  logout : (req, res) ->
-    req.logout()
-    res.redirect '/'
 
   usernameAvailable : (req, res) ->
     User.usernameAvailable req.params.username, (err, available) ->

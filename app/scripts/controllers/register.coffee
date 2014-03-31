@@ -1,16 +1,15 @@
 'use strict'
 
 angular.module('auth')
-  .controller 'RegisterCtrl', ($scope, $http) ->
+  .controller 'RegisterCtrl', ($scope, $location, auth) ->
     $scope.user =
       username: ''
       email: ''
       password: ''
       confirmPassword: ''
     $scope.register = ->
-      $http.post '/auth/register', $scope.user
-        # username: $scope.username
-        # email: $scope.email
-        # password: $scope.password
+      auth.register($scope.user)
+        .then (data) ->
+          $location.replace '/' if data.success 
 
 
