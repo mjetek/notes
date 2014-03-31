@@ -23,10 +23,10 @@ form(name='form', ng-submit='register()', novalidate='')
                          required='Password is required'
                          minlength='Password is too short, it must have at least 6 characters')
   .row
-    .password-confirm-field(ng-class='{error: form[\'password-confirm\'].$dirty && !form[\'password-confirm\'].$valid}')
+    .password-confirm-field(ng-class='{error: form[\'confirm-password\'].$dirty && !form[\'confirm-password\'].$valid}')
       label Confirm password
-        input(type='password', ng-model='user.confirmPassword' id='password-confirm', name='password-confirm' placeholder='Confirm password', required='' ng-match='user.password')
-      validation-message(val-message-for='passwordConfirm',
+        input(type='password', ng-model='user.confirmPassword' id='confirm-password', name='confirm-password' placeholder='Confirm password', required='' ng-match='user.password')
+      validation-message(val-message-for='confirm-password',
                          required='Confirm your password',
                          match='Password doesn\'t match')
   .row
