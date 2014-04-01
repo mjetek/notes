@@ -17,10 +17,11 @@ module.exports = (passport) ->
   localStrategy = new LocalStrategy (username, password, done) ->
     User.findOne {username: username}, (err, user) ->
       return done err if err
-      return done null, no, {message: 'Incorrect username.'} if not user
+      return done null, no, {message: 'Incorrect username.'} unless user
+      return done null, no, {message: 'This account has not been activated. Please activate your account to start using our service'} unless user.active
       user.verifyPassword password, (err, valid) ->
         return done err if err
-        return done null, no, {message: 'Incorrect password.'} if not valid
+        return done null, no, {message: 'Incorrect password.'} unless valid
         return done null, user
 
   facebookStrategy = new FacebookStrategy {

@@ -3,7 +3,11 @@ table
     tr
       th Title
       th Date
+      th
   tbody
     tr(ng-repeat='note in notes')
-      td {{note.title}}
-      td {{note.time}}
+      td 
+        a(ng-href='#/notes/{{note.slug}}') {{note.title}}
+      td {{note.time | date: 'short'}}
+      td
+        a(ng-click='delete(note)') Delete

@@ -19,9 +19,9 @@ noteSchema = mongoose.Schema
 
 noteSchema.plugin friendly
 
-noteSchema.statics.getList = (sort, page, pageSize, next) ->
+noteSchema.statics.getList = (user, sort, page, pageSize, next) ->
   # this.paginate {}, page, pageSize, next
-  this.find()
+  this.find(author: user)
     .sort(sort)
     .skip((page-1)*pageSize)
     .limit(pageSize)

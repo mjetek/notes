@@ -3,7 +3,7 @@ urls = require '../misc/urls'
 
 module.exports = (passport, User, mailer) ->
   callbackConfig =
-    successRedirect: '/'
+    successRedirect: '/app'
     failureRedirect: '/'
     failureFlash: no
 

@@ -10,7 +10,7 @@ module.exports = (Note) ->
       res.jsonp note
 
   getByPermalink: (req, res) ->
-    Note.getByPermalink req.params.permalink, (err, note) ->
+    Note.findByFriendly req.params.permalink, (err, note) ->
       throw err if err
       res.jsonp note
 
@@ -21,6 +21,6 @@ module.exports = (Note) ->
     sort = req.query.sort ? 'time'
     page = req.query.page ? 1
     pageSize = req.query.pageSize ? 10
-    Note.getList sort, page, pageSize, (err, notes) ->
+    Note.getList req.user sort, page, pageSize, (err, notes) ->
       throw err if err
       res.jsonp notes

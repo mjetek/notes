@@ -11,6 +11,9 @@ angular.module('notes2App', [
       .when '/notes',
         templateUrl: 'views/notes'
         controller: 'NotesListCtrl'
+      .when '/notes/:slug',
+        templateUrl: '/views/notes/create'
+        controller: 'NotesCreateCtrl'
       .when '/notes/create',
         templateUrl: 'views/notes/create'
         controller: 'NotesCreateCtrl'
