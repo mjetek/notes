@@ -9,7 +9,7 @@ angular.module('auth')
       confirmPassword: ''
     $scope.register = ->
       auth.register($scope.user)
-        .then (data) ->
-          $location.replace '/' if data.success 
+        .then (result) ->
+          $location.replace '/' if result.data.success 
 
 

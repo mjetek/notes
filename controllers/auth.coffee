@@ -22,7 +22,7 @@ module.exports = (passport, User, mailer) ->
       if not user
         return res.json
           success: no
-          error: 'Incorect user name or password'
+          message: 'Incorect user name or password'
 
       req.logIn user, (err) ->
         return next err if err

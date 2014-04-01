@@ -1,6 +1,6 @@
 angular.module('auth')
-  .factory 'auth', ($http) ->
-    console.log 'initialize auth service'
+  .factory 'auth', ($http, $q) ->
+    
     login: (credentials) ->
       $http.post '/login', credentials
 

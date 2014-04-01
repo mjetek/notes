@@ -1,5 +1,8 @@
 h3 log in
 form(name='form', novalidate='', ng-submit='login()')
+  .row(ng-show='error.message')
+    .alert-box.alert(data-alert='')
+      |{{error.message}}
   .row
     .username-field(ng-class='{error: (form.username.$dirty && !form.username.$valid)}')
       label User name
