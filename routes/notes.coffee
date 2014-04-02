@@ -7,5 +7,6 @@ module.exports = (app) ->
   app.get '/notes', requireAuthenticated, notes.getNotes
   app.get '/views/notes/create', requireAuthenticated, notes.create
   app.get '/notes/:permalink', requireAuthenticated, notes.getByPermalink
-
+  
+  app.post '/notes/:permalink', requireAuthenticated, notes.doEdit
   app.post '/notes', requireAuthenticated, notes.doCreate

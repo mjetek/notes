@@ -378,7 +378,7 @@ module.exports = function (grunt) {
     // Run some tasks in parallel to speed up the build process
     concurrent: {
       options: {
-        limit: 6,
+        limit: 6
       },
       server: [
         'coffee:dist',

@@ -1,3 +1,5 @@
+_ = require 'lodash'
+
 module.exports = (Note) ->
   create: (req, res) ->
     res.render 'notes/create'
@@ -8,6 +10,14 @@ module.exports = (Note) ->
     Note.create req.body, (err, note) ->
       throw err if err
       res.jsonp note
+
+  doEdit: (req, res) ->
+    Note.findByFriendly req.params.permalink, (err, note) ->
+      throw err if err
+      _.assign note, req.body
+      note.save (err, note) ->
+        throw err if err
+        res.json success: yes
 
   getByPermalink: (req, res) ->
     Note.findByFriendly req.params.permalink, (err, note) ->
@@ -21,6 +31,6 @@ module.exports = (Note) ->
     sort = req.query.sort ? 'time'
     page = req.query.page ? 1
     pageSize = req.query.pageSize ? 10
-    Note.getList req.user sort, page, pageSize, (err, notes) ->
+    Note.getList req.user, sort, page, pageSize, (err, notes) ->
       throw err if err
       res.jsonp notes
