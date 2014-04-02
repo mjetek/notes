@@ -14,6 +14,7 @@ module.exports = (Note) ->
   doEdit: (req, res) ->
     Note.findByFriendly req.params.permalink, (err, note) ->
       throw err if err
+      return res.send 403 unless note.author.equals(req.user._id)
       _.assign note, req.body
       note.save (err, note) ->
         throw err if err
@@ -22,6 +23,7 @@ module.exports = (Note) ->
   getByPermalink: (req, res) ->
     Note.findByFriendly req.params.permalink, (err, note) ->
       throw err if err
+      return res.send 403 unless note.author.equals(req.user._id)
       res.jsonp note
 
   viewNotes: (req, res) ->
