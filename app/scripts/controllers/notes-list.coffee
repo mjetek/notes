@@ -1,9 +1,8 @@
 'use strict'
 
 angular.module('notes2App')
-  .controller 'NotesListCtrl', ($scope, Note) ->
+  .controller 'NotesListCtrl', ($scope, $modal, Note) ->
     $scope.notes = Note.query()
-    # $scope.notes = [
-    #   { title: 'whatever', date: '11-25-2012'}
-    #   { title: 'whatever2', date: '08-25-2012'}
-    # ]
+    $scope.delete = (note) ->
+      $modal.open
+        template: 'Are you sure you want to delete this note?'
