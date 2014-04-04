@@ -10,3 +10,5 @@ module.exports = (app) ->
   
   app.post '/notes/:permalink', requireAuthenticated, notes.doEdit
   app.post '/notes', requireAuthenticated, notes.doCreate
+
+  app.delete '/notes/:friendly', requireAuthenticated, notes.doRemove

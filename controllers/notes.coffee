@@ -20,9 +20,18 @@ module.exports = (Note) ->
         throw err if err
         res.json success: yes
 
+  doRemove: (req, res) ->
+    Note.findByFriendly req.params.friendly, (err, note) ->
+      throw err if err
+      return res.send 403 unless note.author.equals req.user._id
+      note.remove (err, note) ->
+        throw err if err
+        res.json success: yes
+
   getByPermalink: (req, res) ->
     Note.findByFriendly req.params.permalink, (err, note) ->
       throw err if err
+      return res.send 404 unless note
       return res.send 403 unless note.author.equals(req.user._id)
       res.jsonp note
 

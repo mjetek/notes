@@ -1,8 +1,10 @@
-form(ng-submit='save()')
+form(ng-submit='save()', name='form', novalidate='')
   .row
     .large-12.columns
       label(for='title') Title
-      input(type='text', placeholder='Title', ng-model='note.title')
+      input(type='text', name='title', placeholder='Title', ng-model='note.title', required='')
+      validation-message(val-message-for='title',
+                         required='Title is required')
   .row
     .large-12.columns
       label(for='note') Note

@@ -5,8 +5,9 @@ angular.module('notes2App', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
-  'mm.foundation.modal',
-  'common'
+  'mm.foundation',
+  'common',
+  'validation'
 ])
   .config(($routeProvider) ->
       $routeProvider
