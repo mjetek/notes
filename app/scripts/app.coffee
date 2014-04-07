@@ -5,7 +5,9 @@ angular.module('notes2App', [
   'ngResource',
   'ngSanitize',
   'ngRoute',
+  'ngAnimate',
   'mm.foundation',
+  'chieffancypants.loadingBar',
   'common',
   'validation'
 ])
@@ -28,3 +30,4 @@ angular.module('notes2App', [
           redirectTo: '/notes')
   .config(($httpProvider) ->
     $httpProvider.interceptors.push 'httpErrorHandlerInterceptor')
+  .config((cfpLoadingBarProvider) -> cfpLoadingBarProvider.includeSpinner = no)

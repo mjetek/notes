@@ -6,15 +6,20 @@ html
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
     // bower:css
     link(rel='stylesheet', href='app/bower_components/foundation/css/foundation.css')
+    link(rel='stylesheet', href='app/bower_components/angular-loading-bar/src/loading-bar.css')
     // endbower
+    link(rel='stylesheet', href='/styles/main.css')
   body(ng-app='notes2App')
     .row
+      .large-3.columns
+        h1 Notes
       .large-9.columns
-        if currentUser
-          p #{currentUser.displayName}
-          a(href='/logout') logout
-        else
-          a(href='/#login') login
+        .right
+            if currentUser
+              span #{currentUser.displayName} &nbsp;
+              a(href='/logout').button logout
+            else
+              a(href='/#login').button login
     .row
       block content
 
@@ -39,8 +44,11 @@ html
     script(src='app/bower_components/angular-route/angular-route.js')
     script(src='app/bower_components/fastclick/lib/fastclick.js')
     script(src='app/bower_components/jquery.cookie/jquery.cookie.js')
+    script(src='app/bower_components/jquery-placeholder/jquery.placeholder.js')
     script(src='app/bower_components/foundation/js/foundation.js')
     script(src='app/bower_components/angular-foundation/mm-foundation-tpls.js')
+    script(src='app/bower_components/angular-loading-bar/src/loading-bar.js')
+    script(src='app/bower_components/angular-animate/angular-animate.js')
     // endbower
 
     //- PRINT_SCRIPTS
@@ -57,10 +65,10 @@ html
     script(type='text/javascript', src='scripts/directives/ng-match.js')
     script(type='text/javascript', src='scripts/modules/common/common.js')
     script(type='text/javascript', src='scripts/modules/common/services/httpErrorHandlerInterceptor.js')
-    script(type='text/javascript', src='scripts/modules/validation/validation.js')
     script(type='text/javascript', src='scripts/modules/validation/directives/focused.js')
     script(type='text/javascript', src='scripts/modules/validation/directives/remote.js')
     script(type='text/javascript', src='scripts/modules/validation/directives/validationMessage.js')
+    script(type='text/javascript', src='scripts/modules/validation/validation.js')
     script(type='text/javascript', src='scripts/services/auth.js')
     script(type='text/javascript', src='scripts/services/note.js')
     //- END_PRINT_SCRIPTS

@@ -27,6 +27,7 @@ module.exports = (app, passport) ->
   app.use '/app', express.static(path.join __dirname, '../app')
   app.use '/scripts', express.static(path.join __dirname, '../.tmp/scripts')
   app.use '/scripts', express.static(path.join __dirname, '../app/scripts')
+  app.use '/styles', express.static(path.join __dirname, '../.tmp/styles')
   # app.use '/templates', express.static(path.join __dirname, '../app/bower_components/angular-foundation')
 
   app.set 'port', config.port
