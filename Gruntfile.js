@@ -202,6 +202,24 @@ module.exports = function (grunt) {
           ext: '.js'
         }]
       },
+
+      distServer: {
+        options: {
+          sourceMap: false
+        },
+        files: [{
+          expand: true,
+          src: [
+            '**/*.coffee',
+            '!app/**',
+            '!test/**',
+            '!node_modules/**'
+          ],
+          dest: 'dist',
+          ext: '.js'
+        }]
+      },
+
       test: {
         files: [{
           expand: true,
@@ -260,43 +278,56 @@ module.exports = function (grunt) {
     // Reads HTML for usemin blocks to enable smart builds that automatically
     // concat, minify and revision files. Creates configurations in memory so
     // additional tasks can operate on them
+    // useminPrepare: {
+    //   html: '<%= yeoman.app %>/index.html',
+    //   options: {
+    //     dest: '<%= yeoman.dist %>'
+    //   }
+    // },
     useminPrepare: {
-      html: '<%= yeoman.app %>/index.html',
+      html: 'views/layout.jade',
       options: {
-        dest: '<%= yeoman.dist %>'
+        dest: 'dist'
       }
     },
 
     // Performs rewrites based on rev and the useminPrepare configuration
+    // usemin: {
+    //   html: ['<%= yeoman.dist %>/{,*/}*.html'],
+    //   css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+    //   options: {
+    //     assetsDirs: ['<%= yeoman.dist %>']
+    //   }
+    // },
     usemin: {
-      html: ['<%= yeoman.dist %>/{,*/}*.html'],
-      css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
+      html: ['views/layout.jade'],
+      // css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['<%= yeoman.dist %>']
+        assetsDirs: ['dist']
       }
     },
 
     // // The following *-min tasks produce minified files in the dist folder
-    // imagemin: {
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '<%= yeoman.app %>/images',
-    //       src: '{,*/}*.{png,jpg,jpeg,gif}',
-    //       dest: '<%= yeoman.dist %>/images'
-    //     }]
-    //   }
-    // },
-    // svgmin: {
-    //   dist: {
-    //     files: [{
-    //       expand: true,
-    //       cwd: '<%= yeoman.app %>/images',
-    //       src: '{,*/}*.svg',
-    //       dest: '<%= yeoman.dist %>/images'
-    //     }]
-    //   }
-    // },
+    imagemin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '{,*/}*.{png,jpg,jpeg,gif}',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
+    svgmin: {
+      dist: {
+        files: [{
+          expand: true,
+          cwd: '<%= yeoman.app %>/images',
+          src: '{,*/}*.svg',
+          dest: '<%= yeoman.dist %>/images'
+        }]
+      }
+    },
     // Not necessary since compiled jade files are already minimized
     // htmlmin: {
     //   dist: {
@@ -315,6 +346,13 @@ module.exports = function (grunt) {
     //   }
     // },
 
+    filerev: {
+
+      dist: {
+        dest: 'dist'
+      }
+    },
+
     // Allow the use of non-minsafe AngularJS files. Automatically makes it
     // minsafe compatible so Uglify does not destroy the ng references
     ngmin: {
@@ -327,6 +365,33 @@ module.exports = function (grunt) {
         }]
       }
     },
+
+    // jade: {
+    //   options: {
+    //     client: true
+    //   },
+    //   dist: {
+    //     files: [{
+    //       expand: true,
+    //       src: 'views/**/*.jade',
+    //       dest: 'dist',
+    //       ext: '.html'
+    //     }]
+    //   }
+    // },
+
+    // jadeUsemin: {
+    //   dist: {
+    //     options: {
+    //       uglify: true
+    //     },
+    //     files: {
+    //       src: [
+    //         'views/layout.jade'
+    //       ]
+    //     }
+    //   }
+    // },
 
     script_tags: {
       options: {
@@ -502,7 +567,19 @@ module.exports = function (grunt) {
     'uglify',
     'rev',
     'usemin',
-    'htmlmin'
+    'coffee:distServer'
+    // 'htmlmin' - no need when use jade
+  ]);
+
+  grunt.registerTask('useminAndRev', [
+    'compass',
+    'coffee:dist',
+    'useminPrepare',
+    'uglify',
+    'cssmin',
+    'concat',
+    'filerev',
+    'usemin'
   ]);
 
   grunt.registerTask('default', [

@@ -8,7 +8,8 @@
 				".tmp",
 				"dist",
 				"node_modules",
-				"app/bower_components"
+				"app/bower_components",
+				".idea"
 			],
 			"follow_symlinks": true,
 			"path": "."

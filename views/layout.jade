@@ -4,12 +4,20 @@ html
     title= title
     meta(charset='utf-8')
     meta(name='viewport' content='width=device-width, initial-scale=1.0')
-    // bower:css
-    link(rel='stylesheet', href='app/bower_components/foundation/css/foundation.css')
-    link(rel='stylesheet', href='app/bower_components/angular-loading-bar/src/loading-bar.css')
-    link(rel='stylesheet', href='app/bower_components/animate.css/animate.css')
-    // endbower
-    link(rel='stylesheet', href='/styles/main.css')
+    if env === 'development'
+      //-<!-- build:css styles/vendor.min.css -->
+      // bower:css
+      link(rel='stylesheet', href='app/bower_components/foundation/css/foundation.css')
+      link(rel='stylesheet', href='app/bower_components/angular-loading-bar/src/loading-bar.css')
+      link(rel='stylesheet', href='app/bower_components/animate.css/animate.css')
+      // endbower
+      //-<!-- endbuild -->
+    else
+      link(rel='stylesheet', href='styles/vendor.min.css')
+
+    //-<!-- build:css styles/styles.min.css -->
+    link(rel='stylesheet', href='.tmp/styles/main.css')
+    //-<!-- endbuild -->
   body(ng-app='notes2App')
     .row
       .large-3.columns
@@ -33,6 +41,7 @@ html
           |&nbsp;
           button.button(ng-click='cancel()').secondary.small.radius Cancel
 
+    //-<!-- build:js scripts/vendor.min.js -->
     // bower:js
     script(src='app/bower_components/modernizr/modernizr.js')
     script(src='app/bower_components/jquery/jquery.js')
@@ -54,25 +63,26 @@ html
     script(src='app/bower_components/angular-moment/angular-moment.js')
     script(src='app/bower_components/ngAnimate-animate.css/animate.js')
     // endbower
+    //-<!-- endbuild -->
 
-    //- PRINT_SCRIPTS
-    script(type='text/javascript', src='scripts/app.js')
-    script(type='text/javascript', src='scripts/auth.js')
-    script(type='text/javascript', src='scripts/controllers/account-login.js')
-    script(type='text/javascript', src='scripts/controllers/change-password.js')
-    script(type='text/javascript', src='scripts/controllers/delete-note.js')
-    script(type='text/javascript', src='scripts/controllers/main.js')
-    script(type='text/javascript', src='scripts/controllers/notes-create.js')
-    script(type='text/javascript', src='scripts/controllers/notes-list.js')
-    script(type='text/javascript', src='scripts/controllers/register.js')
-    script(type='text/javascript', src='scripts/controllers/reset-password.js')
-    script(type='text/javascript', src='scripts/directives/ng-match.js')
-    script(type='text/javascript', src='scripts/modules/common/common.js')
-    script(type='text/javascript', src='scripts/modules/common/services/httpErrorHandlerInterceptor.js')
-    script(type='text/javascript', src='scripts/modules/validation/validation.js')
-    script(type='text/javascript', src='scripts/modules/validation/directives/focused.js')
-    script(type='text/javascript', src='scripts/modules/validation/directives/remote.js')
-    script(type='text/javascript', src='scripts/modules/validation/directives/validationMessage.js')
-    script(type='text/javascript', src='scripts/services/auth.js')
-    script(type='text/javascript', src='scripts/services/note.js')
-    //- END_PRINT_SCRIPTS
+    //-<!-- build:js scripts/app.min.js -->
+    script(type='text/javascript', src='.tmp/scripts/app.js')
+    script(type='text/javascript', src='.tmp/scripts/auth.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/account-login.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/change-password.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/delete-note.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/main.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/notes-create.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/notes-list.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/register.js')
+    script(type='text/javascript', src='.tmp/scripts/controllers/reset-password.js')
+    script(type='text/javascript', src='.tmp/scripts/directives/ng-match.js')
+    script(type='text/javascript', src='.tmp/scripts/modules/common/common.js')
+    script(type='text/javascript', src='.tmp/scripts/modules/common/services/httpErrorHandlerInterceptor.js')
+    script(type='text/javascript', src='.tmp/scripts/modules/validation/validation.js')
+    script(type='text/javascript', src='.tmp/scripts/modules/validation/directives/focused.js')
+    script(type='text/javascript', src='.tmp/scripts/modules/validation/directives/remote.js')
+    script(type='text/javascript', src='.tmp/scripts/modules/validation/directives/validationMessage.js')
+    script(type='text/javascript', src='.tmp/scripts/services/auth.js')
+    script(type='text/javascript', src='.tmp/scripts/services/note.js')
+    //-<!-- endbuild -->
