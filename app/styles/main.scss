@@ -1,44 +1,5 @@
-.row {
-  -webkit-perspective: 1000px;
-}
-
-[ng-view] {
-  top: 0;
-  // background: yellow;
-  position: absolute;
-  transition: .5s;
-
-  &.ng-enter {
-    left: 100%;
-    // -webkit-transition-delay: 4s;
-    // -webkit-transform: rotateY(-360deg);
-  }
-  &.ng-enter-active {
-    // -webkit-transform: rotateY(0);
-    left: 0;
-  }
-
-  // &.ng-enter-stagger {
-  //     -webkit-transition-delay: 6s;
-  //     -webkit-transition-duration: 0;
-  // }
-
-  &.ng-leave {
-    z-index: 1000;
-    // -webkit-transform: rotateY(0);
-    left: 0;
-  }
-
-  // &.ng-leave-stagger {
-  //     -webkit-transition-delay: 6s;
-  //     -webkit-transition-duration: 0;
-  // }
-
-  &.ng-leave-active {
-    -webkit-transform: rotateY(360deg);
-    left: -100%;
-  }
-}
+@import "animations";
+@import "common";
 
 /* Responsive: Portrait tablets and up */
 @media screen and (min-width: 768px) {

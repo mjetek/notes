@@ -7,6 +7,7 @@ html
     // bower:css
     link(rel='stylesheet', href='app/bower_components/foundation/css/foundation.css')
     link(rel='stylesheet', href='app/bower_components/angular-loading-bar/src/loading-bar.css')
+    link(rel='stylesheet', href='app/bower_components/animate.css/animate.css')
     // endbower
     link(rel='stylesheet', href='/styles/main.css')
   body(ng-app='notes2App')
@@ -49,6 +50,9 @@ html
     script(src='app/bower_components/angular-foundation/mm-foundation-tpls.js')
     script(src='app/bower_components/angular-loading-bar/src/loading-bar.js')
     script(src='app/bower_components/angular-animate/angular-animate.js')
+    script(src='app/bower_components/moment/moment.js')
+    script(src='app/bower_components/angular-moment/angular-moment.js')
+    script(src='app/bower_components/ngAnimate-animate.css/animate.js')
     // endbower
 
     //- PRINT_SCRIPTS
@@ -65,10 +69,10 @@ html
     script(type='text/javascript', src='scripts/directives/ng-match.js')
     script(type='text/javascript', src='scripts/modules/common/common.js')
     script(type='text/javascript', src='scripts/modules/common/services/httpErrorHandlerInterceptor.js')
+    script(type='text/javascript', src='scripts/modules/validation/validation.js')
     script(type='text/javascript', src='scripts/modules/validation/directives/focused.js')
     script(type='text/javascript', src='scripts/modules/validation/directives/remote.js')
     script(type='text/javascript', src='scripts/modules/validation/directives/validationMessage.js')
-    script(type='text/javascript', src='scripts/modules/validation/validation.js')
     script(type='text/javascript', src='scripts/services/auth.js')
     script(type='text/javascript', src='scripts/services/note.js')
     //- END_PRINT_SCRIPTS

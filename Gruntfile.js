@@ -44,7 +44,10 @@ module.exports = function (grunt) {
             HOST: 'localhost'
           },
           ext: 'js,coffee',
-          ignore: 'node_modules/**'
+          ignore: [
+            'node_modules/**',
+            'app/**' // don't restart when client side scripts change
+          ]
         }
       }
     },

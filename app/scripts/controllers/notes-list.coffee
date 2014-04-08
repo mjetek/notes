@@ -7,7 +7,8 @@ angular.module('notes2App')
       modalInstance = $modal.open
         templateUrl: 'deleteModalContent.html'
         controller: 'DeleteNoteController'
-        windowClass: 'tiny'
+        backdrop: no
+        windowClass: 'tiny dn-flip-y'
 
       modalInstance.result.then (action) ->
         note.$remove().then -> 

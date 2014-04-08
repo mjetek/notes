@@ -11,4 +11,6 @@ form(ng-submit='save()', name='form', novalidate='')
       textarea(placeholder='Your note', ng-model='note.content')
   .row
     .large-12.columns
-      input(type='submit' value='Save').button
+      input(type='submit' value='Save').button.small.radius
+      |&nbsp;
+      input(type='button' ng-click='cancel()' value='Cancel').button.secondary.small.radius

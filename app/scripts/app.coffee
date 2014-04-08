@@ -8,6 +8,8 @@ angular.module('notes2App', [
   'ngAnimate',
   'mm.foundation',
   'chieffancypants.loadingBar',
+  'angularMoment',
+  'ngAnimate-animate.css',
   'common',
   'validation'
 ])
@@ -16,11 +18,11 @@ angular.module('notes2App', [
         .when '/notes',
           templateUrl: 'views/notes'
           controller: 'NotesListCtrl'
-        .when '/notes/:slug',
-          templateUrl: '/views/notes/create'
-          controller: 'NotesCreateCtrl'
         .when '/notes/create',
           templateUrl: 'views/notes/create'
+          controller: 'NotesCreateCtrl'
+        .when '/notes/:slug',
+          templateUrl: '/views/notes/create'
           controller: 'NotesCreateCtrl'
         .when '/error/:errorname',
           templateUrl: (params) ->

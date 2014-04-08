@@ -1,15 +1,15 @@
 a(href='#/notes/create').small.button.radius Add new note
-table
+table.full-width
   thead
     tr
       th Title
-      th(width='150') Date
+      th(width='150') When
       th(width='100')
   tbody
     tr(ng-repeat='note in notes')
       td 
         a(ng-href='#/notes/{{note.slug}}') {{note.title}}
-      td {{note.time | date: 'short'}}
+      td(am-time-ago='note.time')
       td
         a(ng-click='delete(note)') Delete
 
