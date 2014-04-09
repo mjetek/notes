@@ -7,6 +7,8 @@
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
 
+var fs = require('fs');
+
 module.exports = function (grunt) {
 
   // Load grunt tasks automatically
@@ -14,6 +16,16 @@ module.exports = function (grunt) {
 
   // Time how long tasks take. Can help when optimizing build times
   require('time-grunt')(grunt);
+
+  grunt.registerTask('clean-after-filerev', function() {
+    var summary = grunt.filerev.summary;
+    for (var file in summary) {
+      if (summary.hasOwnProperty(file)) {
+          grunt.log.writeln('removing: ' + file);
+          fs.unlinkSync(file);
+      }
+    }
+  });
 
   // Define the configuration for all the tasks
   grunt.initConfig({
@@ -285,8 +297,12 @@ module.exports = function (grunt) {
     //   }
     // },
     useminPrepare: {
-      html: 'views/layout.jade',
+      html: [
+        'views/partials/scripts.html',
+        'views/partials/styles.html'
+      ],
       options: {
+        root: '.',
         dest: 'dist'
       }
     },
@@ -300,7 +316,7 @@ module.exports = function (grunt) {
     //   }
     // },
     usemin: {
-      html: ['views/layout.jade'],
+      html: ['views/partials/scripts.html'], // copy first, then update copied version
       // css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
         assetsDirs: ['dist']
@@ -347,9 +363,12 @@ module.exports = function (grunt) {
     // },
 
     filerev: {
-
       dist: {
-        dest: 'dist'
+        expand: true,
+        src: [
+          'dist/scripts/*.js',
+          'dist/styles/*.css'
+        ]
       }
     },
 
@@ -405,9 +424,15 @@ module.exports = function (grunt) {
     },
 
     // Replace Google CDN references
+    // cdnify: {
+    //   dist: {
+    //     html: ['<%= yeoman.dist %>/*.html']
+    //   }
+    // },
+
     cdnify: {
       dist: {
-        html: ['<%= yeoman.dist %>/*.html']
+        html: ['views/partials/scripts.html']
       }
     },
 
@@ -572,14 +597,17 @@ module.exports = function (grunt) {
   ]);
 
   grunt.registerTask('useminAndRev', [
+    'clean',
     'compass',
     'coffee:dist',
+    'cdnify',
     'useminPrepare',
+    'concat',
     'uglify',
     'cssmin',
-    'concat',
+    'usemin',
     'filerev',
-    'usemin'
+    'clean-after-filerev'
   ]);
 
   grunt.registerTask('default', [
