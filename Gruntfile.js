@@ -1,12 +1,6 @@
 // Generated on 2014-02-06 using generator-angular 0.7.1
 'use strict';
 
-// # Globbing
-// for performance reasons we're only matching one level down:
-// 'test/spec/{,*/}*.js'
-// use this if you want to recursively match all subfolders:
-// 'test/spec/**/*.js'
-
 var fs = require('fs');
 
 module.exports = function (grunt) {
@@ -188,7 +182,7 @@ module.exports = function (grunt) {
     // Automatically inject Bower components into the app
     bowerInstall: {
       dist: {
-        src: ['views/**/*.jade']
+        src: ['views/partials/*.html']
       }
     },
 
@@ -298,8 +292,8 @@ module.exports = function (grunt) {
     // },
     useminPrepare: {
       html: [
-        'views/partials/scripts.html',
-        'views/partials/styles.html'
+        'dist/views/partials/scripts.html',
+        'dist/views/partials/styles.html'
       ],
       options: {
         root: '.',
@@ -316,10 +310,13 @@ module.exports = function (grunt) {
     //   }
     // },
     usemin: {
-      html: ['views/partials/scripts.html'], // copy first, then update copied version
+      html: [
+        'dist/views/partials/scripts.html',
+        'dist/views/partials/styles.html'
+      ], // copy first, then update copied version
       // css: ['<%= yeoman.dist %>/styles/{,*/}*.css'],
       options: {
-        assetsDirs: ['dist']
+        // assetsDirs: ['dist']
       }
     },
 
@@ -432,7 +429,23 @@ module.exports = function (grunt) {
 
     cdnify: {
       dist: {
-        html: ['views/partials/scripts.html']
+        options: {
+          // cdn: require('cdnjs-cdn-data'),
+          componentsPath: 'app/bower_components'
+        },
+        html: ['/dist/views/partials/*.html']
+      }
+    },
+
+    cdn_nobuild: {
+      test: {
+        options: {
+        },
+        files: [{
+          expand: true,
+          src: ['/dist/views/partials/*.html'],
+          dest: '.'
+        }],
       }
     },
 
@@ -465,6 +478,11 @@ module.exports = function (grunt) {
         cwd: '<%= yeoman.app %>/styles',
         dest: '.tmp/styles/',
         src: '{,*/}*.css'
+      },
+      views: {
+        expand: true,
+        src: ['views/**/*.{jade,html}'],
+        dest: 'dist'
       }
     },
 
@@ -600,13 +618,15 @@ module.exports = function (grunt) {
     'clean',
     'compass',
     'coffee:dist',
+    'copy:views',
     'cdnify',
+    'cdn_nobuild',
     'useminPrepare',
     'concat',
     'uglify',
     'cssmin',
-    'usemin',
     'filerev',
+    'usemin',
     'clean-after-filerev'
   ]);
 
