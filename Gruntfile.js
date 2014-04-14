@@ -415,7 +415,7 @@ module.exports = function (grunt) {
       },
       dist: {
         files: {
-          'views/layout.jade': ['.tmp/**/*.js']
+          'views/partials/scripts.html': ['.tmp/**/*.js']
         }
       }
     },
@@ -433,7 +433,7 @@ module.exports = function (grunt) {
           // cdn: require('cdnjs-cdn-data'),
           componentsPath: 'app/bower_components'
         },
-        html: ['/dist/views/partials/*.html']
+        html: ['dist/views/{,*/}*.html']
       }
     },
 
@@ -443,7 +443,7 @@ module.exports = function (grunt) {
         },
         files: [{
           expand: true,
-          src: ['/dist/views/partials/*.html'],
+          src: ['dist/views/{,*/}*.html'],
           dest: '.'
         }],
       }
@@ -617,6 +617,7 @@ module.exports = function (grunt) {
   grunt.registerTask('useminAndRev', [
     'clean',
     'compass',
+    'coffee:distServer',
     'coffee:dist',
     'copy:views',
     'cdnify',
